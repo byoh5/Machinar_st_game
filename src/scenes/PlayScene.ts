@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import type { EpisodeManifest, HotspotDef, SceneDef } from '../core/types';
+import type { EpisodeManifest, HotspotDef, SceneDef, SceneDecoration } from '../core/types';
 import type { RuntimeState } from '../core/store';
 
 interface PlaySceneHooks {
@@ -11,6 +11,8 @@ type SfxEventName = 'click' | 'success' | 'error' | 'complete';
 
 const BASE_WIDTH = 960;
 const BASE_HEIGHT = 540;
+const PLAYER_TEXTURE_KEY = 'char:player';
+const PLAYER_ASSET_PATH = 'assets/characters/hero_player.svg';
 
 const EVENT_SFX: Record<SfxEventName, string> = {
   click: 'sfx_click',
@@ -47,10 +49,14 @@ export class PlayScene extends Phaser.Scene {
   private descriptionLabel!: Phaser.GameObjects.Text;
 
   private actor!: Phaser.GameObjects.Container;
+  private actorFloatTween: Phaser.Tweens.Tween | null = null;
 
   private hotspotObjects: Phaser.GameObjects.GameObject[] = [];
   private hotspotTweens: Phaser.Tweens.Tween[] = [];
+  private decorationObjects: Phaser.GameObjects.GameObject[] = [];
+  private decorationTweens: Phaser.Tweens.Tween[] = [];
   private backgroundKeyBySceneId = new Map<string, string>();
+  private decorationKeyByAssetPath = new Map<string, string>();
   private ambientKeyByPath = new Map<string, string>();
   private currentAmbientKey: string | null = null;
   private lastRenderedSceneId: string | null = null;
@@ -75,9 +81,20 @@ export class PlayScene extends Phaser.Scene {
           this.ambientKeyByPath.set(scene.ambientSfx, ambientKey);
           this.load.audio(ambientKey, scene.ambientSfx);
         }
+
+        scene.decorations?.forEach((decoration) => {
+          if (this.decorationKeyByAssetPath.has(decoration.asset)) {
+            return;
+          }
+
+          const key = `dec:${this.decorationKeyByAssetPath.size}`;
+          this.decorationKeyByAssetPath.set(decoration.asset, key);
+          this.load.image(key, decoration.asset);
+        });
       });
     });
 
+    this.load.image(PLAYER_TEXTURE_KEY, PLAYER_ASSET_PATH);
     this.load.audio(EVENT_SFX.click, 'assets/sfx/ui_click.wav');
     this.load.audio(EVENT_SFX.success, 'assets/sfx/puzzle_success.wav');
     this.load.audio(EVENT_SFX.error, 'assets/sfx/puzzle_error.wav');
@@ -107,9 +124,16 @@ export class PlayScene extends Phaser.Scene {
     this.descriptionLabel.setDepth(12);
 
     this.actor = this.createActor();
+    this.startActorFloat();
 
     this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.stopAmbient();
+      this.clearHotspots();
+      this.clearDecorations();
+      if (this.actorFloatTween) {
+        this.actorFloatTween.stop();
+        this.actorFloatTween = null;
+      }
     });
 
     this.isReady = true;
@@ -139,24 +163,44 @@ export class PlayScene extends Phaser.Scene {
 
   private createActor(): Phaser.GameObjects.Container {
     const shadow = this.add.ellipse(0, 10, 34, 12, 0x000000, 0.35);
-    const body = this.add.rectangle(0, -3, 24, 34, 0xc4d1dd);
-    const head = this.add.circle(0, -26, 14, 0xd9e6ef);
-    const eyeLeft = this.add.circle(-5, -28, 2, 0x21364c);
-    const eyeRight = this.add.circle(5, -28, 2, 0x21364c);
+    let actorParts: Phaser.GameObjects.GameObject[] = [shadow];
 
-    const actor = this.add.container(120, 455, [shadow, body, head, eyeLeft, eyeRight]);
+    if (this.textures.exists(PLAYER_TEXTURE_KEY)) {
+      const sprite = this.add.image(0, -20, PLAYER_TEXTURE_KEY);
+      sprite.setScale(0.35);
+      actorParts = [shadow, sprite];
+    } else {
+      const body = this.add.rectangle(0, -3, 24, 34, 0xc4d1dd);
+      const head = this.add.circle(0, -26, 14, 0xd9e6ef);
+      const eyeLeft = this.add.circle(-5, -28, 2, 0x21364c);
+      const eyeRight = this.add.circle(5, -28, 2, 0x21364c);
+      actorParts = [shadow, body, head, eyeLeft, eyeRight];
+    }
+
+    const actor = this.add.container(120, 455, actorParts);
     actor.setDepth(32);
 
-    this.tweens.add({
-      targets: actor,
-      y: actor.y - 3,
+    return actor;
+  }
+
+  private startActorFloat(): void {
+    if (!this.actor) {
+      return;
+    }
+
+    if (this.actorFloatTween) {
+      this.actorFloatTween.stop();
+      this.actorFloatTween = null;
+    }
+
+    this.actorFloatTween = this.tweens.add({
+      targets: this.actor,
+      y: this.actor.y - 3,
       yoyo: true,
       repeat: -1,
       duration: 1200,
       ease: 'Sine.easeInOut',
     });
-
-    return actor;
   }
 
   private animateTapFeedback(x: number, y: number): void {
@@ -176,13 +220,20 @@ export class PlayScene extends Phaser.Scene {
     const targetY = Phaser.Math.Clamp(hotspot.y + hotspot.h + 12, 330, 475);
 
     this.tweens.killTweensOf(this.actor);
+    if (this.actorFloatTween) {
+      this.actorFloatTween.stop();
+      this.actorFloatTween = null;
+    }
     this.tweens.add({
       targets: this.actor,
       x: targetX,
       y: targetY,
       duration: 170,
       ease: 'Quad.easeOut',
-      onComplete: onArrive,
+      onComplete: () => {
+        this.startActorFloat();
+        onArrive();
+      },
     });
   }
 
@@ -257,6 +308,51 @@ export class PlayScene extends Phaser.Scene {
     this.hotspotObjects = [];
   }
 
+  private clearDecorations(): void {
+    this.decorationTweens.forEach((tween) => tween.stop());
+    this.decorationTweens = [];
+
+    this.decorationObjects.forEach((object) => object.destroy());
+    this.decorationObjects = [];
+  }
+
+  private renderDecoration(decoration: SceneDecoration, index: number): void {
+    const textureKey = this.decorationKeyByAssetPath.get(decoration.asset);
+    if (!textureKey || !this.textures.exists(textureKey)) {
+      return;
+    }
+
+    const sprite = this.add.image(decoration.x, decoration.y, textureKey);
+    sprite.setOrigin(0.5, 1);
+    sprite.setScale(decoration.scale ?? 1);
+    sprite.setAlpha(decoration.alpha ?? 1);
+    sprite.setDepth(decoration.depth ?? 8 + index * 0.02);
+    this.decorationObjects.push(sprite);
+
+    if (!decoration.pulse) {
+      return;
+    }
+
+    const pulseTween = this.tweens.add({
+      targets: sprite,
+      alpha: {
+        from: Math.max(0.45, (decoration.alpha ?? 1) - 0.2),
+        to: decoration.alpha ?? 1,
+      },
+      duration: 900 + index * 50,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
+    });
+    this.decorationTweens.push(pulseTween);
+  }
+
+  private renderDecorations(sceneDef: SceneDef): void {
+    (sceneDef.decorations ?? []).forEach((decoration, index) => {
+      this.renderDecoration(decoration, index);
+    });
+  }
+
   private renderScene(): void {
     if (!this.episode || !this.snapshot || !this.isReady) {
       return;
@@ -270,8 +366,10 @@ export class PlayScene extends Phaser.Scene {
     const sceneChanged = this.lastRenderedSceneId !== null && this.lastRenderedSceneId !== sceneDef.id;
 
     this.clearHotspots();
+    this.clearDecorations();
     this.applyBackground(sceneDef);
     this.applyAmbient(sceneDef);
+    this.renderDecorations(sceneDef);
 
     this.titleLabel.setText(sceneDef.title);
     this.descriptionLabel.setText(sceneDef.description);

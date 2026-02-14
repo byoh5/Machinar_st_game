@@ -1,6 +1,7 @@
 import './style.css';
 
 import { defaultEpisode, episodeList } from './content/episodes';
+import { getItemMeta } from './content/itemCatalog';
 import { canActivateHotspot } from './core/game';
 import {
   clearSave,
@@ -217,7 +218,7 @@ const applyPuzzleSuccess = (puzzle: PuzzleDef, rewardItemId?: string): void => {
   if (rewardItemId) {
     const added = store.addItem(rewardItemId);
     if (added) {
-      ui.showMessage(`새 아이템 획득: ${rewardItemId}`);
+      ui.showMessage(`새 아이템 획득: ${getItemMeta(rewardItemId).label}`);
     }
   }
 };
@@ -259,7 +260,7 @@ const handleUseItemAction = (hotspot: HotspotDef): void => {
   const selected = store.getSelectedItem();
   if (selected !== hotspot.action.requiredItemId) {
     renderer.playSfx('error');
-    ui.showMessage(`선택한 아이템이 다릅니다. 필요한 아이템: ${hotspot.action.requiredItemId}`);
+    ui.showMessage(`선택한 아이템이 다릅니다. 필요한 아이템: ${getItemMeta(hotspot.action.requiredItemId).label}`);
     return;
   }
 
@@ -281,7 +282,8 @@ const handleHotspot = (hotspot: HotspotDef): void => {
     }
     case 'pickup': {
       const added = store.addItem(action.itemId);
-      ui.showMessage(added ? `아이템 획득: ${action.itemId}` : `이미 보유 중: ${action.itemId}`);
+      const itemLabel = getItemMeta(action.itemId).label;
+      ui.showMessage(added ? `아이템 획득: ${itemLabel}` : `이미 보유 중: ${itemLabel}`);
       break;
     }
     case 'use_item': {

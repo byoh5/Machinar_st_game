@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 220" width="260" height="220">
+  <rect x="26" y="28" width="208" height="166" rx="16" fill="#4f6572"/>
+  <rect x="40" y="44" width="180" height="134" rx="10" fill="#223241"/>
+  <circle cx="78" cy="88" r="16" fill="#efb15f"/>
+  <circle cx="130" cy="88" r="16" fill="#87d3ff"/>
+  <circle cx="182" cy="88" r="16" fill="#9de4a5"/>
+  <rect x="66" y="124" width="128" height="34" rx="10" fill="#4d6988"/>
+  <text x="130" y="146" text-anchor="middle" fill="#f2f0e9" font-size="22" font-family="Courier New">PWR</text>
+</svg>

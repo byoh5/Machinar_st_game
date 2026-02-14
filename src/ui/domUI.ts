@@ -1,5 +1,6 @@
 import type { EpisodeManifest, ItemId, PuzzleDef, StoryLine } from '../core/types';
 import type { RuntimeState } from '../core/store';
+import { getItemMeta } from '../content/itemCatalog';
 
 interface UIHandlers {
   onSave: () => void;
@@ -230,10 +231,22 @@ export class DOMUI {
     }
 
     snapshot.inventory.forEach((itemId) => {
+      const itemMeta = getItemMeta(itemId);
       const button = document.createElement('button');
       button.type = 'button';
       button.className = `inventory-item ${snapshot.selectedItemId === itemId ? 'selected' : ''}`;
-      button.textContent = itemId;
+      if (itemMeta.icon) {
+        const icon = document.createElement('img');
+        icon.className = 'inventory-icon';
+        icon.src = itemMeta.icon;
+        icon.alt = itemMeta.label;
+        button.appendChild(icon);
+      }
+
+      const label = document.createElement('span');
+      label.className = 'inventory-label';
+      label.textContent = itemMeta.label;
+      button.appendChild(label);
       button.addEventListener('click', () => {
         this.handlers.onSelectItem(itemId);
       });
@@ -447,10 +460,22 @@ export class DOMUI {
     list.className = 'puzzle-grid';
 
     handlers.inventory.forEach((itemId) => {
+      const itemMeta = getItemMeta(itemId);
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'puzzle-key';
-      button.textContent = itemId;
+      if (itemMeta.icon) {
+        const icon = document.createElement('img');
+        icon.className = 'puzzle-item-icon';
+        icon.src = itemMeta.icon;
+        icon.alt = itemMeta.label;
+        button.appendChild(icon);
+      }
+
+      const label = document.createElement('span');
+      label.className = 'puzzle-item-label';
+      label.textContent = itemMeta.label;
+      button.appendChild(label);
       button.addEventListener('click', () => {
         if (selected.has(itemId)) {
           selected.delete(itemId);

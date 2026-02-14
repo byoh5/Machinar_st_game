@@ -53,6 +53,18 @@ export interface SceneDef {
   background: string;
   hotspots: HotspotDef[];
   ambientSfx?: string;
+  decorations?: SceneDecoration[];
+}
+
+export interface SceneDecoration {
+  id: string;
+  asset: string;
+  x: number;
+  y: number;
+  scale?: number;
+  alpha?: number;
+  depth?: number;
+  pulse?: boolean;
 }
 
 export type HotspotAction =

@@ -58,6 +58,46 @@ export const episode01: EpisodeManifest = {
       description: '버려진 로봇 부품 더미 속에서 시작한다. 전력을 살리면 배수로로 이동할 수 있다.',
       background: 'assets/backgrounds/scrap_yard.svg',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
+      decorations: [
+        {
+          id: 'scrap_merchant',
+          asset: 'assets/characters/scrap_merchant.svg',
+          x: 690,
+          y: 438,
+          scale: 0.6,
+          alpha: 0.95,
+        },
+        {
+          id: 'wire_bundle',
+          asset: 'assets/props/wire_bundle.svg',
+          x: 155,
+          y: 430,
+          scale: 0.72,
+          pulse: true,
+        },
+        {
+          id: 'battery_cell',
+          asset: 'assets/props/battery_cell.svg',
+          x: 318,
+          y: 422,
+          scale: 0.72,
+          pulse: true,
+        },
+        {
+          id: 'power_panel',
+          asset: 'assets/props/power_panel.svg',
+          x: 525,
+          y: 364,
+          scale: 0.92,
+        },
+        {
+          id: 'sewer_door',
+          asset: 'assets/props/sewer_door.svg',
+          x: 860,
+          y: 456,
+          scale: 0.92,
+        },
+      ],
       hotspots: [
         {
           id: 'pickup_wire',
@@ -109,6 +149,31 @@ export const episode01: EpisodeManifest = {
       description: '밸브 잠금 패턴을 해제하면 시계탑으로 통하는 통로가 열린다.',
       background: 'assets/backgrounds/sewer_gate.svg',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
+      decorations: [
+        {
+          id: 'valve_guard',
+          asset: 'assets/characters/valve_guard.svg',
+          x: 188,
+          y: 438,
+          scale: 0.62,
+          alpha: 0.95,
+        },
+        {
+          id: 'valve_lock',
+          asset: 'assets/props/valve_lock.svg',
+          x: 530,
+          y: 400,
+          scale: 0.92,
+          pulse: true,
+        },
+        {
+          id: 'tower_tunnel',
+          asset: 'assets/props/sewer_door.svg',
+          x: 862,
+          y: 458,
+          scale: 0.88,
+        },
+      ],
       hotspots: [
         {
           id: 'back_to_yard',
@@ -147,6 +212,38 @@ export const episode01: EpisodeManifest = {
       description: '수리 조합과 타이밍 스위치를 해결하면 도시 문 앞까지 갈 수 있다.',
       background: 'assets/backgrounds/clock_tower.svg',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
+      decorations: [
+        {
+          id: 'tower_mechanic',
+          asset: 'assets/characters/tower_mechanic.svg',
+          x: 165,
+          y: 438,
+          scale: 0.62,
+          alpha: 0.94,
+        },
+        {
+          id: 'workbench',
+          asset: 'assets/props/workbench.svg',
+          x: 334,
+          y: 430,
+          scale: 0.92,
+        },
+        {
+          id: 'generator_switch',
+          asset: 'assets/props/generator_switch.svg',
+          x: 622,
+          y: 392,
+          scale: 0.92,
+          pulse: true,
+        },
+        {
+          id: 'tower_exit',
+          asset: 'assets/props/sewer_door.svg',
+          x: 864,
+          y: 454,
+          scale: 0.9,
+        },
+      ],
       hotspots: [
         {
           id: 'back_to_sewer',
@@ -196,6 +293,32 @@ export const episode01: EpisodeManifest = {
       description: '보안 논리 잠금을 풀고 전력 코어를 삽입하면 첫 에피소드가 종료된다.',
       background: 'assets/backgrounds/city_gate.svg',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
+      decorations: [
+        {
+          id: 'gate_sentinel',
+          asset: 'assets/characters/gate_sentinel.svg',
+          x: 220,
+          y: 438,
+          scale: 0.63,
+          alpha: 0.95,
+        },
+        {
+          id: 'security_console',
+          asset: 'assets/props/security_console.svg',
+          x: 460,
+          y: 400,
+          scale: 0.93,
+          pulse: true,
+        },
+        {
+          id: 'gate_core_slot',
+          asset: 'assets/props/gate_core_slot.svg',
+          x: 805,
+          y: 438,
+          scale: 0.96,
+          pulse: true,
+        },
+      ],
       hotspots: [
         {
           id: 'back_to_tower',

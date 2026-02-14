@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 220" width="260" height="220">
+  <rect x="30" y="24" width="200" height="164" rx="16" fill="#3c4f74"/>
+  <rect x="44" y="38" width="172" height="90" rx="10" fill="#12243c"/>
+  <rect x="44" y="136" width="172" height="38" rx="10" fill="#2a3c59"/>
+  <circle cx="80" cy="157" r="10" fill="#8ad7ff"/>
+  <circle cx="114" cy="157" r="10" fill="#8ad7ff"/>
+  <circle cx="148" cy="157" r="10" fill="#f0c178"/>
+  <circle cx="182" cy="157" r="10" fill="#f28f7a"/>
+  <text x="130" y="91" text-anchor="middle" fill="#c8f1ff" font-size="20" font-family="Courier New">SECURE</text>
+</svg>

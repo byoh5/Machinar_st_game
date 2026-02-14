@@ -197,10 +197,23 @@ body {
   border: 1px solid rgba(247, 237, 226, 0.22);
   background: #212f41;
   color: var(--text);
-  border-radius: 999px;
+  border-radius: 12px;
   padding: 6px 10px;
   font-size: 0.82rem;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inventory-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.inventory-label {
+  line-height: 1;
 }
 
 .inventory-item.selected {
@@ -318,6 +331,18 @@ body {
   border-radius: 8px;
   padding: 10px 12px;
   cursor: pointer;
+}
+
+.puzzle-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.puzzle-item-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
 .logic-option.selected,

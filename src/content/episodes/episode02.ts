@@ -58,6 +58,40 @@ export const episode02: EpisodeManifest = {
       description: '도시 내부 첫 지역. 방송탑으로 가기 위해 부품과 신호 장치를 점검한다.',
       background: 'assets/backgrounds/steam_square.svg',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
+      decorations: [
+        {
+          id: 'signal_operator',
+          asset: 'assets/characters/signal_operator.svg',
+          x: 705,
+          y: 438,
+          scale: 0.61,
+          alpha: 0.95,
+        },
+        {
+          id: 'gear_piece',
+          asset: 'assets/props/gear_piece.svg',
+          x: 174,
+          y: 430,
+          scale: 0.72,
+          pulse: true,
+        },
+        {
+          id: 'oil_can_prop',
+          asset: 'assets/props/oil_can_prop.svg',
+          x: 355,
+          y: 430,
+          scale: 0.72,
+          pulse: true,
+        },
+        {
+          id: 'signal_panel',
+          asset: 'assets/props/signal_panel.svg',
+          x: 565,
+          y: 382,
+          scale: 0.93,
+          pulse: true,
+        },
+      ],
       hotspots: [
         {
           id: 'pickup_gear',
@@ -105,6 +139,31 @@ export const episode02: EpisodeManifest = {
       description: '노선 락을 풀면 방송탑 작업실로 들어갈 수 있다.',
       background: 'assets/backgrounds/train_hub.svg',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
+      decorations: [
+        {
+          id: 'rail_dispatcher',
+          asset: 'assets/characters/rail_dispatcher.svg',
+          x: 185,
+          y: 438,
+          scale: 0.62,
+          alpha: 0.95,
+        },
+        {
+          id: 'route_lock',
+          asset: 'assets/props/route_lock.svg',
+          x: 532,
+          y: 398,
+          scale: 0.93,
+          pulse: true,
+        },
+        {
+          id: 'lab_door',
+          asset: 'assets/props/sewer_door.svg',
+          x: 862,
+          y: 456,
+          scale: 0.9,
+        },
+      ],
       hotspots: [
         {
           id: 'back_to_square',
@@ -143,6 +202,31 @@ export const episode02: EpisodeManifest = {
       description: '기어와 오일을 조합하고, 안테나 스위치를 기동해 외곽 옥상으로 이동한다.',
       background: 'assets/backgrounds/radio_lab.svg',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
+      decorations: [
+        {
+          id: 'lab_engineer',
+          asset: 'assets/characters/lab_engineer.svg',
+          x: 175,
+          y: 438,
+          scale: 0.62,
+          alpha: 0.95,
+        },
+        {
+          id: 'lab_workbench',
+          asset: 'assets/props/workbench.svg',
+          x: 334,
+          y: 430,
+          scale: 0.9,
+        },
+        {
+          id: 'antenna_switch',
+          asset: 'assets/props/antenna_switch.svg',
+          x: 635,
+          y: 394,
+          scale: 0.93,
+          pulse: true,
+        },
+      ],
       hotspots: [
         {
           id: 'back_to_hub',
@@ -192,6 +276,32 @@ export const episode02: EpisodeManifest = {
       description: '마지막 보안 논리를 해제하고 로터를 삽입하면 2화가 완료된다.',
       background: 'assets/backgrounds/outer_rooftop.svg',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
+      decorations: [
+        {
+          id: 'rooftop_watcher',
+          asset: 'assets/characters/rooftop_watcher.svg',
+          x: 210,
+          y: 438,
+          scale: 0.62,
+          alpha: 0.95,
+        },
+        {
+          id: 'roof_console',
+          asset: 'assets/props/security_console.svg',
+          x: 445,
+          y: 402,
+          scale: 0.92,
+          pulse: true,
+        },
+        {
+          id: 'amplifier_slot',
+          asset: 'assets/props/amplifier_slot.svg',
+          x: 795,
+          y: 438,
+          scale: 0.95,
+          pulse: true,
+        },
+      ],
       hotspots: [
         {
           id: 'back_to_lab',
