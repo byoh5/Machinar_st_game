@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "deploy:pages": "bash scripts/publish-github-pages.sh"
+    "deploy:pages": "bash scripts/publish-github-pages.sh",
+    "backgrounds:apply-photo": "bash scripts/apply-photo-backgrounds.sh",
+    "backgrounds:check-photo": "bash scripts/apply-photo-backgrounds.sh --dry-run"
   },
   "devDependencies": {
     "typescript": "~5.9.3",

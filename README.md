@@ -9,6 +9,24 @@ npm install
 npm run dev
 ```
 
+## 실사 배경 자동 적용
+
+1. 실사 배경 8장을 `public/assets/backgrounds/photos/`에 넣습니다.
+2. 파일명은 씬 ID와 같게 둡니다. 예: `scrap_yard.webp`, `city_gate.webp`
+3. 아래 명령으로 자동 반영합니다.
+
+```bash
+npm run backgrounds:apply-photo
+```
+
+검증만 하고 파일 변경은 하지 않으려면:
+
+```bash
+npm run backgrounds:check-photo
+```
+
+프롬프트 템플릿은 `docs/photoreal-background-prompts.md`를 참고하세요.
+
 ## GitHub Pages 자동 배포
 
 이미 `.github/workflows/deploy-pages.yml`가 포함되어 있고,
