@@ -56,7 +56,7 @@ export const episode01: EpisodeManifest = {
       id: 'scrap_yard',
       title: '고철 더미 광장',
       description: '버려진 로봇 부품 더미 속에서 시작한다. 전력을 살리면 배수로로 이동할 수 있다.',
-      background: 'assets/backgrounds/scrap_yard.svg',
+      background: 'assets/backgrounds/scrap_yard.webp',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
       decorations: [
         {
@@ -147,7 +147,7 @@ export const episode01: EpisodeManifest = {
       id: 'sewer_gate',
       title: '배수로 제어실',
       description: '밸브 잠금 패턴을 해제하면 시계탑으로 통하는 통로가 열린다.',
-      background: 'assets/backgrounds/sewer_gate.svg',
+      background: 'assets/backgrounds/sewer_gate.webp',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
       decorations: [
         {
@@ -210,7 +210,7 @@ export const episode01: EpisodeManifest = {
       id: 'clock_tower',
       title: '시계탑 작업실',
       description: '수리 조합과 타이밍 스위치를 해결하면 도시 문 앞까지 갈 수 있다.',
-      background: 'assets/backgrounds/clock_tower.svg',
+      background: 'assets/backgrounds/clock_tower.webp',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
       decorations: [
         {
@@ -291,7 +291,7 @@ export const episode01: EpisodeManifest = {
       id: 'city_gate',
       title: '도시 외곽 게이트',
       description: '보안 논리 잠금을 풀고 전력 코어를 삽입하면 첫 에피소드가 종료된다.',
-      background: 'assets/backgrounds/city_gate.svg',
+      background: 'assets/backgrounds/city_gate.webp',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
       decorations: [
         {

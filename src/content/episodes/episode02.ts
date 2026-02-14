@@ -56,7 +56,7 @@ export const episode02: EpisodeManifest = {
       id: 'steam_square',
       title: '증기 광장',
       description: '도시 내부 첫 지역. 방송탑으로 가기 위해 부품과 신호 장치를 점검한다.',
-      background: 'assets/backgrounds/steam_square.svg',
+      background: 'assets/backgrounds/steam_square.webp',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
       decorations: [
         {
@@ -137,7 +137,7 @@ export const episode02: EpisodeManifest = {
       id: 'train_hub',
       title: '열차 제어실',
       description: '노선 락을 풀면 방송탑 작업실로 들어갈 수 있다.',
-      background: 'assets/backgrounds/train_hub.svg',
+      background: 'assets/backgrounds/train_hub.webp',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
       decorations: [
         {
@@ -200,7 +200,7 @@ export const episode02: EpisodeManifest = {
       id: 'radio_lab',
       title: '방송탑 작업실',
       description: '기어와 오일을 조합하고, 안테나 스위치를 기동해 외곽 옥상으로 이동한다.',
-      background: 'assets/backgrounds/radio_lab.svg',
+      background: 'assets/backgrounds/radio_lab.webp',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
       decorations: [
         {
@@ -274,7 +274,7 @@ export const episode02: EpisodeManifest = {
       id: 'outer_rooftop',
       title: '외곽 옥상',
       description: '마지막 보안 논리를 해제하고 로터를 삽입하면 2화가 완료된다.',
-      background: 'assets/backgrounds/outer_rooftop.svg',
+      background: 'assets/backgrounds/outer_rooftop.webp',
       ambientSfx: 'assets/sfx/ambient_loop.wav',
       decorations: [
         {
