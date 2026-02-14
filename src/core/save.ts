@@ -34,6 +34,10 @@ export const migrateSave = (unknownSave: unknown): GameSaveV1 | null => {
 
   const flags = isRecord(unknownSave.flags) ? unknownSave.flags : {};
   const hintsUsed = isRecord(unknownSave.hintsUsed) ? unknownSave.hintsUsed : {};
+  const visitedScenes = isStringArray(unknownSave.visitedScenes)
+    ? unknownSave.visitedScenes
+    : [unknownSave.sceneId];
+  const seenStoryKeys = isStringArray(unknownSave.seenStoryKeys) ? unknownSave.seenStoryKeys : [];
 
   return {
     saveVersion: 1,
@@ -43,6 +47,8 @@ export const migrateSave = (unknownSave: unknown): GameSaveV1 | null => {
     solvedPuzzles: unknownSave.solvedPuzzles,
     flags: flags as Record<string, boolean | number | string>,
     hintsUsed: hintsUsed as Record<string, number>,
+    visitedScenes,
+    seenStoryKeys,
     updatedAt: unknownSave.updatedAt,
   };
 };

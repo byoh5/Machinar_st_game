@@ -4,6 +4,53 @@ export const episode02: EpisodeManifest = {
   id: 'episode_02',
   title: '에피소드 02: 증기 광장의 신호',
   startSceneId: 'steam_square',
+  objectives: [
+    {
+      id: 'e2_obj_1',
+      text: '증기 광장에서 로터 재료를 모아라.',
+      allOf: [
+        { type: 'has_item', itemId: 'small_gear' },
+        { type: 'has_item', itemId: 'oil_can' },
+      ],
+    },
+    {
+      id: 'e2_obj_2',
+      text: '열차 제어실의 노선 잠금을 해제하라.',
+      allOf: [{ type: 'flag_true', flag: 'route_lock_released' }],
+    },
+    {
+      id: 'e2_obj_3',
+      text: '방송탑 안테나를 기동시켜 옥상으로 진입하라.',
+      allOf: [{ type: 'flag_true', flag: 'antenna_online' }],
+    },
+    {
+      id: 'e2_obj_4',
+      text: '신호 증폭기를 복구해 에피소드를 완료하라.',
+      allOf: [{ type: 'flag_true', flag: 'game_complete' }],
+    },
+  ],
+  sceneStories: {
+    steam_square: [
+      { speaker: '주인공', text: '도시 안쪽은 더 복잡하고 더 낡았다.' },
+      { speaker: '시스템', text: '신호를 복구하면 다음 구역의 길이 열린다.' },
+    ],
+    train_hub: [
+      { speaker: '주인공', text: '열차가 멈춘 이유는 노선 락 때문이군.' },
+      { speaker: '시스템', text: '패턴을 정확히 맞춰 통로를 열자.' },
+    ],
+    radio_lab: [
+      { speaker: '주인공', text: '안테나를 살리면 신호를 멀리 보낼 수 있어.' },
+      { speaker: '시스템', text: '로터를 조립하고 스위치를 제한 시간 안에 기동하라.' },
+    ],
+    outer_rooftop: [
+      { speaker: '주인공', text: '바람이 세다. 마지막 보안 장치만 남았다.' },
+      { speaker: '시스템', text: '콘솔을 해독한 뒤 증폭기를 삽입하라.' },
+    ],
+  },
+  endingStory: [
+    { speaker: '주인공', text: '신호가 살아났다. 도시의 다른 구역도 깨어나기 시작한다.' },
+    { speaker: '시스템', text: '에피소드 02 완료. 다음 에피소드를 설계할 수 있습니다.' },
+  ],
   scenes: [
     {
       id: 'steam_square',

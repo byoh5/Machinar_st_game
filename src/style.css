@@ -93,6 +93,7 @@ body {
 
 .message-wrap,
 .episode-wrap,
+.objective-wrap,
 .inventory-wrap,
 .status-wrap {
   border: 1px solid rgba(247, 237, 226, 0.11);
@@ -126,6 +127,7 @@ body {
 
 .inventory-wrap h2,
 .episode-wrap h2,
+.objective-wrap h2,
 .status-wrap h2 {
   margin: 0 0 8px;
   font-size: 0.95rem;
@@ -157,6 +159,32 @@ body {
 .episode-item.locked {
   opacity: 0.55;
   cursor: not-allowed;
+}
+
+.objective-progress {
+  margin: 0 0 8px;
+  color: #d9d2bb;
+  font-size: 0.84rem;
+}
+
+.objective-list {
+  display: grid;
+  gap: 6px;
+}
+
+.objective-item {
+  color: #d8dfea;
+  font-size: 0.9rem;
+  padding: 5px 8px;
+  border-radius: 8px;
+  background: rgba(44, 60, 83, 0.45);
+  border: 1px solid rgba(247, 237, 226, 0.09);
+}
+
+.objective-item.done {
+  color: #d6ffd6;
+  background: rgba(34, 84, 42, 0.42);
+  border-color: rgba(138, 209, 138, 0.35);
 }
 
 .inventory-list {
@@ -223,6 +251,41 @@ body {
   padding: 14px;
   display: grid;
   gap: 10px;
+}
+
+.story-modal {
+  z-index: 24;
+}
+
+.story-card {
+  width: min(620px, 96vw);
+  background: linear-gradient(135deg, #1b2737, #172130);
+}
+
+.story-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.story-speaker {
+  margin: 0;
+  font-weight: 700;
+  color: #ffe4a1;
+}
+
+.story-text {
+  margin: 0;
+  font-size: 1rem;
+  color: #edf2fa;
+  min-height: 64px;
+  line-height: 1.6;
+}
+
+.story-actions {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .modal-header {

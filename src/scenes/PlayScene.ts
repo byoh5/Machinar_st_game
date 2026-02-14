@@ -46,10 +46,14 @@ export class PlayScene extends Phaser.Scene {
   private titleLabel!: Phaser.GameObjects.Text;
   private descriptionLabel!: Phaser.GameObjects.Text;
 
+  private actor!: Phaser.GameObjects.Container;
+
   private hotspotObjects: Phaser.GameObjects.GameObject[] = [];
+  private hotspotTweens: Phaser.Tweens.Tween[] = [];
   private backgroundKeyBySceneId = new Map<string, string>();
   private ambientKeyByPath = new Map<string, string>();
   private currentAmbientKey: string | null = null;
+  private lastRenderedSceneId: string | null = null;
 
   constructor(episodes: EpisodeManifest[], hooks: PlaySceneHooks) {
     super('play');
@@ -102,6 +106,8 @@ export class PlayScene extends Phaser.Scene {
     });
     this.descriptionLabel.setDepth(12);
 
+    this.actor = this.createActor();
+
     this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.stopAmbient();
     });
@@ -128,6 +134,55 @@ export class PlayScene extends Phaser.Scene {
     this.sound.play(key, {
       volume: EVENT_SFX_VOLUME[eventName],
       rate: 1,
+    });
+  }
+
+  private createActor(): Phaser.GameObjects.Container {
+    const shadow = this.add.ellipse(0, 10, 34, 12, 0x000000, 0.35);
+    const body = this.add.rectangle(0, -3, 24, 34, 0xc4d1dd);
+    const head = this.add.circle(0, -26, 14, 0xd9e6ef);
+    const eyeLeft = this.add.circle(-5, -28, 2, 0x21364c);
+    const eyeRight = this.add.circle(5, -28, 2, 0x21364c);
+
+    const actor = this.add.container(120, 455, [shadow, body, head, eyeLeft, eyeRight]);
+    actor.setDepth(32);
+
+    this.tweens.add({
+      targets: actor,
+      y: actor.y - 3,
+      yoyo: true,
+      repeat: -1,
+      duration: 1200,
+      ease: 'Sine.easeInOut',
+    });
+
+    return actor;
+  }
+
+  private animateTapFeedback(x: number, y: number): void {
+    const ring = this.add.circle(x, y, 8, 0xf7ede2, 0.35).setDepth(40);
+    this.tweens.add({
+      targets: ring,
+      radius: 34,
+      alpha: 0,
+      duration: 220,
+      ease: 'Quad.easeOut',
+      onComplete: () => ring.destroy(),
+    });
+  }
+
+  private moveActorToHotspot(hotspot: HotspotDef, onArrive: () => void): void {
+    const targetX = Phaser.Math.Clamp(hotspot.x + hotspot.w / 2, 90, BASE_WIDTH - 90);
+    const targetY = Phaser.Math.Clamp(hotspot.y + hotspot.h + 12, 330, 475);
+
+    this.tweens.killTweensOf(this.actor);
+    this.tweens.add({
+      targets: this.actor,
+      x: targetX,
+      y: targetY,
+      duration: 170,
+      ease: 'Quad.easeOut',
+      onComplete: onArrive,
     });
   }
 
@@ -195,6 +250,9 @@ export class PlayScene extends Phaser.Scene {
   }
 
   private clearHotspots(): void {
+    this.hotspotTweens.forEach((tween) => tween.stop());
+    this.hotspotTweens = [];
+
     this.hotspotObjects.forEach((object) => object.destroy());
     this.hotspotObjects = [];
   }
@@ -209,6 +267,8 @@ export class PlayScene extends Phaser.Scene {
       return;
     }
 
+    const sceneChanged = this.lastRenderedSceneId !== null && this.lastRenderedSceneId !== sceneDef.id;
+
     this.clearHotspots();
     this.applyBackground(sceneDef);
     this.applyAmbient(sceneDef);
@@ -216,7 +276,7 @@ export class PlayScene extends Phaser.Scene {
     this.titleLabel.setText(sceneDef.title);
     this.descriptionLabel.setText(sceneDef.description);
 
-    sceneDef.hotspots.forEach((hotspot) => {
+    sceneDef.hotspots.forEach((hotspot, index) => {
       const enabled = this.hooks.isHotspotEnabled(hotspot, this.snapshot as RuntimeState);
       const baseColor = enabled ? 0xf4a259 : 0x5f6f72;
       const labelColor = enabled ? '#122029' : '#d7d7d7';
@@ -227,10 +287,10 @@ export class PlayScene extends Phaser.Scene {
         hotspot.w,
         hotspot.h,
         baseColor,
-        enabled ? 0.24 : 0.17,
+        enabled ? 0.24 : 0.15,
       );
       area.setDepth(20);
-      area.setStrokeStyle(2, enabled ? 0xf7ede2 : 0x9fa6a8, enabled ? 0.8 : 0.45);
+      area.setStrokeStyle(2, enabled ? 0xf7ede2 : 0x9fa6a8, enabled ? 0.8 : 0.4);
 
       const label = this.add.text(hotspot.x + 10, hotspot.y + hotspot.h / 2 - 10, hotspot.label, {
         fontFamily: 'Courier New',
@@ -241,13 +301,42 @@ export class PlayScene extends Phaser.Scene {
       label.setDepth(21);
 
       if (enabled) {
+        const pulse = this.tweens.add({
+          targets: area,
+          alpha: { from: 0.19, to: 0.31 },
+          duration: 900 + index * 60,
+          yoyo: true,
+          repeat: -1,
+          ease: 'Sine.easeInOut',
+        });
+        this.hotspotTweens.push(pulse);
+
         area.setInteractive({ cursor: 'pointer' });
+        area.on('pointerover', () => {
+          area.setScale(1.02);
+          area.setStrokeStyle(2, 0xfff3dc, 0.95);
+        });
+        area.on('pointerout', () => {
+          area.setScale(1);
+          area.setStrokeStyle(2, 0xf7ede2, 0.8);
+        });
         area.on('pointerdown', () => {
-          this.hooks.onHotspotPressed(hotspot);
+          const centerX = hotspot.x + hotspot.w / 2;
+          const centerY = hotspot.y + hotspot.h / 2;
+          this.animateTapFeedback(centerX, centerY);
+          this.moveActorToHotspot(hotspot, () => {
+            this.hooks.onHotspotPressed(hotspot);
+          });
         });
       }
 
       this.hotspotObjects.push(area, label);
     });
+
+    if (sceneChanged) {
+      this.cameras.main.fadeIn(220, 0, 0, 0);
+    }
+
+    this.lastRenderedSceneId = sceneDef.id;
   }
 }

@@ -4,6 +4,53 @@ export const episode01: EpisodeManifest = {
   id: 'episode_01',
   title: '에피소드 01: 녹슨 도시의 전원',
   startSceneId: 'scrap_yard',
+  objectives: [
+    {
+      id: 'e1_obj_1',
+      text: '고철 더미에서 전선과 배터리를 확보하라.',
+      allOf: [
+        { type: 'has_item', itemId: 'wire' },
+        { type: 'has_item', itemId: 'battery' },
+      ],
+    },
+    {
+      id: 'e1_obj_2',
+      text: '전원 패널을 복구해 배수로를 개방하라.',
+      allOf: [{ type: 'flag_true', flag: 'power_restored' }],
+    },
+    {
+      id: 'e1_obj_3',
+      text: '도시 외곽 게이트의 보안 코드를 해독하라.',
+      allOf: [{ type: 'flag_true', flag: 'city_code_cracked' }],
+    },
+    {
+      id: 'e1_obj_4',
+      text: '전력 코어를 삽입해 게이트를 활성화하라.',
+      allOf: [{ type: 'flag_true', flag: 'game_complete' }],
+    },
+  ],
+  sceneStories: {
+    scrap_yard: [
+      { speaker: '주인공', text: '여긴... 고철장인가. 몸이 아직 버거워.' },
+      { speaker: '시스템', text: '도시로 돌아가려면 전원을 복구해야 한다.' },
+    ],
+    sewer_gate: [
+      { speaker: '주인공', text: '배수로 깊숙한 곳까지 녹이 슬어 있다.' },
+      { speaker: '시스템', text: '밸브 패턴을 해제하면 다음 구역이 열린다.' },
+    ],
+    clock_tower: [
+      { speaker: '주인공', text: '시계탑은 아직 숨이 붙어 있다.' },
+      { speaker: '시스템', text: '작업대에서 전력 코어를 조립하자.' },
+    ],
+    city_gate: [
+      { speaker: '주인공', text: '드디어 도시 문 앞이다.' },
+      { speaker: '시스템', text: '보안 콘솔을 해제하고 코어를 꽂으면 통과할 수 있다.' },
+    ],
+  },
+  endingStory: [
+    { speaker: '주인공', text: '문이 열렸다. 아직 갈 길은 멀지만, 드디어 안으로 들어간다.' },
+    { speaker: '시스템', text: '에피소드 01 완료. 다음 구역이 해금됩니다.' },
+  ],
   scenes: [
     {
       id: 'scrap_yard',

@@ -1,4 +1,4 @@
-import type { EpisodeManifest, ItemId, PuzzleDef } from '../core/types';
+import type { EpisodeManifest, ItemId, PuzzleDef, StoryLine } from '../core/types';
 import type { RuntimeState } from '../core/store';
 
 interface UIHandlers {
@@ -7,6 +7,17 @@ interface UIHandlers {
   onReset: () => void;
   onSelectItem: (itemId: ItemId | null) => void;
   onSelectEpisode: (episodeId: string) => void;
+}
+
+export interface ObjectiveView {
+  id: string;
+  text: string;
+  done: boolean;
+}
+
+export interface StoryModalOptions {
+  lines: StoryLine[];
+  onFinish: () => void;
 }
 
 export interface PuzzleModalHandlers {
@@ -30,6 +41,8 @@ export class DOMUI {
   private readonly inventoryEl: HTMLElement;
   private readonly statusEl: HTMLElement;
   private readonly episodeListEl: HTMLElement;
+  private readonly objectiveListEl: HTMLElement;
+  private readonly objectiveProgressEl: HTMLElement;
 
   private readonly puzzleModalEl: HTMLDivElement;
   private readonly puzzleTitleEl: HTMLElement;
@@ -38,7 +51,14 @@ export class DOMUI {
   private readonly puzzleHintEl: HTMLElement;
   private readonly puzzleFeedbackEl: HTMLElement;
 
-  private cleanupModal: (() => void) | null = null;
+  private readonly storyModalEl: HTMLDivElement;
+  private readonly storySpeakerEl: HTMLElement;
+  private readonly storyTextEl: HTMLElement;
+  private readonly storyNextBtn: HTMLButtonElement;
+  private readonly storySkipBtn: HTMLButtonElement;
+
+  private cleanupPuzzleModal: (() => void) | null = null;
+  private cleanupStoryModal: (() => void) | null = null;
 
   constructor(root: HTMLElement, handlers: UIHandlers) {
     this.root = root;
@@ -48,7 +68,7 @@ export class DOMUI {
       <div class="app-shell">
         <header class="hud">
           <div class="hud-main">
-            <h1>Machinar MVP</h1>
+            <h1>Machinar Story Build</h1>
             <p id="scene-title" class="scene-title"></p>
           </div>
           <div class="hud-controls">
@@ -70,6 +90,12 @@ export class DOMUI {
         <main class="game-area">
           <div id="game-canvas" class="game-canvas" aria-label="game canvas"></div>
         </main>
+
+        <section class="objective-wrap">
+          <h2>Objectives</h2>
+          <p id="objective-progress" class="objective-progress"></p>
+          <div id="objective-list" class="objective-list"></div>
+        </section>
 
         <section class="inventory-wrap">
           <h2>Inventory</h2>
@@ -97,6 +123,19 @@ export class DOMUI {
           <p id="puzzle-feedback" class="feedback-text"></p>
         </div>
       </div>
+
+      <div id="story-modal" class="modal hidden story-modal" role="dialog" aria-modal="true">
+        <div class="modal-card story-card">
+          <div class="story-top">
+            <p id="story-speaker" class="story-speaker"></p>
+            <button id="story-skip" class="ctrl-btn" type="button">건너뛰기</button>
+          </div>
+          <p id="story-text" class="story-text"></p>
+          <div class="story-actions">
+            <button id="story-next" class="ctrl-btn" type="button">다음</button>
+          </div>
+        </div>
+      </div>
     `;
 
     this.sceneTitleEl = this.getById('scene-title');
@@ -104,6 +143,8 @@ export class DOMUI {
     this.inventoryEl = this.getById('inventory-list');
     this.statusEl = this.getById('status-text');
     this.episodeListEl = this.getById('episode-list');
+    this.objectiveListEl = this.getById('objective-list');
+    this.objectiveProgressEl = this.getById('objective-progress');
 
     this.puzzleModalEl = this.getById('puzzle-modal') as HTMLDivElement;
     this.puzzleTitleEl = this.getById('puzzle-title');
@@ -111,6 +152,12 @@ export class DOMUI {
     this.puzzleBodyEl = this.getById('puzzle-body');
     this.puzzleHintEl = this.getById('puzzle-hint');
     this.puzzleFeedbackEl = this.getById('puzzle-feedback');
+
+    this.storyModalEl = this.getById('story-modal') as HTMLDivElement;
+    this.storySpeakerEl = this.getById('story-speaker');
+    this.storyTextEl = this.getById('story-text');
+    this.storyNextBtn = this.getById('story-next') as HTMLButtonElement;
+    this.storySkipBtn = this.getById('story-skip') as HTMLButtonElement;
 
     this.bindStaticEvents();
   }
@@ -135,6 +182,7 @@ export class DOMUI {
     episode: EpisodeManifest,
     allEpisodes: EpisodeManifest[],
     unlockedEpisodeIds: string[],
+    objectives: ObjectiveView[],
   ): void {
     const currentScene = episode.scenes.find((scene) => scene.id === snapshot.sceneId);
     const solvedCount = snapshot.solvedPuzzles.length;
@@ -145,8 +193,8 @@ export class DOMUI {
       : `${episode.title} - scene missing`;
 
     this.statusEl.textContent = `씬: ${snapshot.sceneId} | 퍼즐: ${solvedCount}/${puzzleCount} | 아이템: ${snapshot.inventory.length}`;
-    this.episodeListEl.innerHTML = '';
 
+    this.episodeListEl.innerHTML = '';
     allEpisodes.forEach((candidate) => {
       const unlocked = unlockedEpisodeIds.includes(candidate.id);
       const active = candidate.id === episode.id;
@@ -159,6 +207,16 @@ export class DOMUI {
         this.handlers.onSelectEpisode(candidate.id);
       });
       this.episodeListEl.appendChild(button);
+    });
+
+    this.objectiveListEl.innerHTML = '';
+    const completedObjectives = objectives.filter((objective) => objective.done).length;
+    this.objectiveProgressEl.textContent = `${completedObjectives}/${objectives.length} 완료`;
+    objectives.forEach((objective) => {
+      const row = document.createElement('div');
+      row.className = `objective-item ${objective.done ? 'done' : ''}`;
+      row.textContent = `${objective.done ? '✓' : '○'} ${objective.text}`;
+      this.objectiveListEl.appendChild(row);
     });
 
     this.inventoryEl.innerHTML = '';
@@ -196,6 +254,66 @@ export class DOMUI {
     this.messageEl.textContent = message;
   }
 
+  openStoryModal(options: StoryModalOptions): void {
+    this.closeStoryModal();
+
+    const lines = [...options.lines];
+    if (lines.length === 0) {
+      options.onFinish();
+      return;
+    }
+
+    this.storyModalEl.classList.remove('hidden');
+    let index = 0;
+
+    const renderLine = () => {
+      const line = lines[index];
+      this.storySpeakerEl.textContent = line.speaker;
+      this.storyTextEl.textContent = line.text;
+      this.storyNextBtn.textContent = index >= lines.length - 1 ? '완료' : '다음';
+    };
+
+    const finish = () => {
+      options.onFinish();
+      this.closeStoryModal();
+    };
+
+    const onNext = () => {
+      if (index >= lines.length - 1) {
+        finish();
+        return;
+      }
+
+      index += 1;
+      renderLine();
+    };
+
+    const onSkip = () => {
+      finish();
+    };
+
+    this.storyNextBtn.addEventListener('click', onNext);
+    this.storySkipBtn.addEventListener('click', onSkip);
+
+    this.cleanupStoryModal = () => {
+      this.storyNextBtn.removeEventListener('click', onNext);
+      this.storySkipBtn.removeEventListener('click', onSkip);
+    };
+
+    renderLine();
+  }
+
+  closeStoryModal(): void {
+    if (this.cleanupStoryModal) {
+      this.cleanupStoryModal();
+      this.cleanupStoryModal = null;
+    }
+
+    this.storyModalEl.classList.add('hidden');
+    this.storySpeakerEl.textContent = '';
+    this.storyTextEl.textContent = '';
+  }
+
   openPuzzleModal(handlers: PuzzleModalHandlers): void {
     this.closePuzzleModal();
 
@@ -227,7 +345,7 @@ export class DOMUI {
 
     const cleanupPuzzleBody = this.renderPuzzleBody(handlers);
 
-    this.cleanupModal = () => {
+    this.cleanupPuzzleModal = () => {
       cleanupPuzzleBody();
       closeBtn.removeEventListener('click', onClose);
       hintBtn.removeEventListener('click', onHint);
@@ -235,9 +353,9 @@ export class DOMUI {
   }
 
   closePuzzleModal(): void {
-    if (this.cleanupModal) {
-      this.cleanupModal();
-      this.cleanupModal = null;
+    if (this.cleanupPuzzleModal) {
+      this.cleanupPuzzleModal();
+      this.cleanupPuzzleModal = null;
     }
 
     this.puzzleModalEl.classList.add('hidden');

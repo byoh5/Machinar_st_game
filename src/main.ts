@@ -12,10 +12,10 @@ import {
   setLastEpisodeId,
 } from './core/save';
 import { GameStore } from './core/store';
-import type { EpisodeManifest, HotspotDef, PuzzleDef } from './core/types';
+import type { EpisodeManifest, HotspotDef, ObjectiveRule, PuzzleDef } from './core/types';
 import { createGameRenderer } from './engine/createGameRenderer';
 import { validatePuzzleAttempt } from './puzzles/validators';
-import { DOMUI } from './ui/domUI';
+import { DOMUI, type ObjectiveView } from './ui/domUI';
 
 const root = document.querySelector<HTMLDivElement>('#app');
 if (!root) {
@@ -40,6 +40,7 @@ if (initialSave) {
 }
 
 let completionAnnounced = false;
+let lastSceneId: string | null = null;
 
 const ui = new DOMUI(root, {
   onSave: () => {
@@ -55,7 +56,9 @@ const ui = new DOMUI(root, {
 
     store.hydrate(save);
     completionAnnounced = false;
+    lastSceneId = null;
     ui.closePuzzleModal();
+    ui.closeStoryModal();
     ui.showMessage(`불러오기 완료: ${activeEpisode.title}`);
     refresh();
   },
@@ -63,7 +66,9 @@ const ui = new DOMUI(root, {
     clearSave(activeEpisode.id);
     store.reset();
     completionAnnounced = false;
+    lastSceneId = null;
     ui.closePuzzleModal();
+    ui.closeStoryModal();
     ui.showMessage(`초기화 완료: ${activeEpisode.title}`);
     refresh();
   },
@@ -94,6 +99,91 @@ const renderer = createGameRenderer('game-canvas', episodeList, {
 
 const findPuzzle = (puzzleId: string): PuzzleDef | undefined =>
   activeEpisode.puzzles.find((puzzle) => puzzle.id === puzzleId);
+
+const evaluateObjectiveRule = (rule: ObjectiveRule): boolean => {
+  const snapshot = store.getSnapshot();
+
+  switch (rule.type) {
+    case 'flag_true':
+      return snapshot.flags[rule.flag] === true;
+    case 'has_item':
+      return snapshot.inventory.includes(rule.itemId);
+    case 'puzzle_solved':
+      return snapshot.solvedPuzzles.includes(rule.puzzleId);
+    case 'scene_visited':
+      return snapshot.visitedScenes.includes(rule.sceneId);
+    default:
+      return false;
+  }
+};
+
+const buildObjectiveViews = (): ObjectiveView[] => {
+  const objectives = activeEpisode.objectives ?? [];
+  return objectives.map((objective) => ({
+    id: objective.id,
+    text: objective.text,
+    done: objective.allOf.every((rule) => evaluateObjectiveRule(rule)),
+  }));
+};
+
+const maybePlaySceneStory = (): boolean => {
+  const snapshot = store.getSnapshot();
+  if (snapshot.sceneId === lastSceneId) {
+    return false;
+  }
+
+  lastSceneId = snapshot.sceneId;
+
+  const lines = activeEpisode.sceneStories?.[snapshot.sceneId] ?? [];
+  if (lines.length === 0) {
+    return false;
+  }
+
+  const sceneStoryKey = `scene:${activeEpisode.id}:${snapshot.sceneId}`;
+  if (store.hasSeenStory(sceneStoryKey)) {
+    return false;
+  }
+
+  store.markStorySeen(sceneStoryKey);
+  persistSave(store.toSave());
+
+  ui.openStoryModal({
+    lines,
+    onFinish: () => {
+      ui.showMessage(`${snapshot.sceneId} 구역 스토리를 확인했습니다.`);
+      refresh();
+    },
+  });
+  return true;
+};
+
+const maybePlayEndingStory = (): void => {
+  const snapshot = store.getSnapshot();
+  if (snapshot.flags.game_complete !== true || completionAnnounced) {
+    return;
+  }
+
+  completionAnnounced = true;
+
+  const endingKey = `ending:${activeEpisode.id}`;
+  const endingLines = activeEpisode.endingStory ?? [];
+
+  if (!store.hasSeenStory(endingKey) && endingLines.length > 0) {
+    store.markStorySeen(endingKey);
+    persistSave(store.toSave());
+    ui.openStoryModal({
+      lines: endingLines,
+      onFinish: () => {
+        renderer.playSfx('complete');
+        ui.showMessage(`${activeEpisode.title} 완료!`);
+        refresh();
+      },
+    });
+  } else {
+    renderer.playSfx('complete');
+    ui.showMessage(`${activeEpisode.title} 완료!`);
+  }
+};
 
 const unlockNextEpisodeIfNeeded = (): void => {
   const snapshot = store.getSnapshot();
@@ -177,7 +267,7 @@ const handleUseItemAction = (hotspot: HotspotDef): void => {
   store.setFlag(hotspot.action.successFlag, true);
   store.removeItem(hotspot.action.requiredItemId);
   store.selectItem(null);
-  ui.showMessage('핵심 전력이 연결되었습니다.');
+  ui.showMessage('핵심 장치를 연결했습니다.');
 };
 
 const handleHotspot = (hotspot: HotspotDef): void => {
@@ -248,7 +338,9 @@ const switchEpisode = (episodeId: string, fromUserAction: boolean): void => {
   }
 
   completionAnnounced = false;
+  lastSceneId = null;
   ui.closePuzzleModal();
+  ui.closeStoryModal();
 
   if (fromUserAction) {
     ui.showMessage(`에피소드 전환: ${activeEpisode.title}`);
@@ -260,15 +352,13 @@ const switchEpisode = (episodeId: string, fromUserAction: boolean): void => {
 const refresh = (): void => {
   const snapshot = store.getSnapshot();
   renderer.update(activeEpisode, snapshot);
-  ui.render(snapshot, activeEpisode, episodeList, unlockedEpisodeIds);
+  ui.render(snapshot, activeEpisode, episodeList, unlockedEpisodeIds, buildObjectiveViews());
   persistSave(store.toSave());
 
   unlockNextEpisodeIfNeeded();
-
-  if (snapshot.flags.game_complete === true && !completionAnnounced) {
-    completionAnnounced = true;
-    renderer.playSfx('complete');
-    ui.showMessage(`${activeEpisode.title} 완료!`);
+  const sceneStoryPlayed = maybePlaySceneStory();
+  if (!sceneStoryPlayed) {
+    maybePlayEndingStory();
   }
 };
 

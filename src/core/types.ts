@@ -13,7 +13,26 @@ export interface GameSaveV1 {
   solvedPuzzles: PuzzleId[];
   flags: Record<string, FlagValue>;
   hintsUsed?: Record<PuzzleId, number>;
+  visitedScenes?: SceneId[];
+  seenStoryKeys?: string[];
   updatedAt: string;
+}
+
+export interface StoryLine {
+  speaker: string;
+  text: string;
+}
+
+export type ObjectiveRule =
+  | { type: 'flag_true'; flag: string }
+  | { type: 'has_item'; itemId: ItemId }
+  | { type: 'puzzle_solved'; puzzleId: PuzzleId }
+  | { type: 'scene_visited'; sceneId: SceneId };
+
+export interface ObjectiveDef {
+  id: string;
+  text: string;
+  allOf: ObjectiveRule[];
 }
 
 export interface EpisodeManifest {
@@ -22,6 +41,9 @@ export interface EpisodeManifest {
   startSceneId: SceneId;
   scenes: SceneDef[];
   puzzles: PuzzleDef[];
+  objectives?: ObjectiveDef[];
+  sceneStories?: Partial<Record<SceneId, StoryLine[]>>;
+  endingStory?: StoryLine[];
 }
 
 export interface SceneDef {

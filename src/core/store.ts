@@ -14,6 +14,8 @@ export interface RuntimeState {
   solvedPuzzles: PuzzleId[];
   flags: Record<string, FlagValue>;
   hintsUsed: Record<PuzzleId, number>;
+  visitedScenes: SceneId[];
+  seenStoryKeys: string[];
   selectedItemId: ItemId | null;
 }
 
@@ -24,6 +26,8 @@ const cloneFlags = (flags: Record<string, FlagValue>): Record<string, FlagValue>
 const cloneHints = (hints: Record<PuzzleId, number>): Record<PuzzleId, number> => ({
   ...hints,
 });
+
+const cloneList = <T>(entries: T[]): T[] => [...entries];
 
 export class GameStore {
   private state: RuntimeState;
@@ -42,6 +46,8 @@ export class GameStore {
       solvedPuzzles: [],
       flags: {},
       hintsUsed: {},
+      visitedScenes: [this.episode.startSceneId],
+      seenStoryKeys: [],
       selectedItemId: null,
     };
   }
@@ -58,6 +64,8 @@ export class GameStore {
       solvedPuzzles: [...save.solvedPuzzles],
       flags: cloneFlags(save.flags),
       hintsUsed: cloneHints(save.hintsUsed ?? {}),
+      visitedScenes: cloneList(save.visitedScenes ?? [save.sceneId]),
+      seenStoryKeys: cloneList(save.seenStoryKeys ?? []),
       selectedItemId: null,
     };
   }
@@ -71,6 +79,8 @@ export class GameStore {
       solvedPuzzles: [...this.state.solvedPuzzles],
       flags: cloneFlags(this.state.flags),
       hintsUsed: cloneHints(this.state.hintsUsed),
+      visitedScenes: cloneList(this.state.visitedScenes),
+      seenStoryKeys: cloneList(this.state.seenStoryKeys),
       updatedAt: new Date().toISOString(),
     };
   }
@@ -83,6 +93,8 @@ export class GameStore {
       solvedPuzzles: [...this.state.solvedPuzzles],
       flags: cloneFlags(this.state.flags),
       hintsUsed: cloneHints(this.state.hintsUsed),
+      visitedScenes: cloneList(this.state.visitedScenes),
+      seenStoryKeys: cloneList(this.state.seenStoryKeys),
       selectedItemId: this.state.selectedItemId,
     };
   }
@@ -94,6 +106,9 @@ export class GameStore {
     }
 
     this.state.sceneId = sceneId;
+    if (!this.state.visitedScenes.includes(sceneId)) {
+      this.state.visitedScenes.push(sceneId);
+    }
     return true;
   }
 
@@ -168,5 +183,19 @@ export class GameStore {
 
   getHintUsage(puzzleId: PuzzleId): number {
     return this.state.hintsUsed[puzzleId] ?? 0;
+  }
+
+  hasVisitedScene(sceneId: SceneId): boolean {
+    return this.state.visitedScenes.includes(sceneId);
+  }
+
+  markStorySeen(storyKey: string): void {
+    if (!this.state.seenStoryKeys.includes(storyKey)) {
+      this.state.seenStoryKeys.push(storyKey);
+    }
+  }
+
+  hasSeenStory(storyKey: string): boolean {
+    return this.state.seenStoryKeys.includes(storyKey);
   }
 }
