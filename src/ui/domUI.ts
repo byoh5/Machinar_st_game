@@ -528,6 +528,7 @@ export class DOMUI {
     let clicks = 0;
     let startedAt = 0;
     let intervalId: number | null = null;
+    let running = false;
 
     const stopTimer = () => {
       if (intervalId !== null) {
@@ -542,11 +543,16 @@ export class DOMUI {
     };
 
     const finish = () => {
+      if (!running) {
+        return;
+      }
+
+      running = false;
       stopTimer();
       switchButton.disabled = true;
       startButton.disabled = false;
 
-      const elapsedMs = Date.now() - startedAt;
+      const elapsedMs = Math.min(Date.now() - startedAt, windowMs);
       const result = handlers.onSubmit({ clicks, elapsedMs });
       this.puzzleFeedbackEl.textContent = result.message;
       if (result.success) {
@@ -557,6 +563,7 @@ export class DOMUI {
     startButton.addEventListener('click', () => {
       clicks = 0;
       startedAt = Date.now();
+      running = true;
       startButton.disabled = true;
       switchButton.disabled = false;
       updateStatus(windowMs);
@@ -579,6 +586,10 @@ export class DOMUI {
 
       clicks += 1;
       updateStatus();
+
+      if (clicks >= targetClicks) {
+        finish();
+      }
     });
 
     this.puzzleBodyEl.append(status, startButton, switchButton);

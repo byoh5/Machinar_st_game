@@ -11,8 +11,6 @@ type SfxEventName = 'click' | 'success' | 'error' | 'complete';
 
 const BASE_WIDTH = 960;
 const BASE_HEIGHT = 540;
-const PLAYER_TEXTURE_KEY = 'char:player';
-const PLAYER_ASSET_PATH = 'assets/characters/hero_player.svg';
 
 const EVENT_SFX: Record<SfxEventName, string> = {
   click: 'sfx_click',
@@ -47,9 +45,6 @@ export class PlayScene extends Phaser.Scene {
   private backgroundImage: Phaser.GameObjects.Image | null = null;
   private titleLabel!: Phaser.GameObjects.Text;
   private descriptionLabel!: Phaser.GameObjects.Text;
-
-  private actor!: Phaser.GameObjects.Container;
-  private actorFloatTween: Phaser.Tweens.Tween | null = null;
 
   private hotspotObjects: Phaser.GameObjects.GameObject[] = [];
   private hotspotTweens: Phaser.Tweens.Tween[] = [];
@@ -94,7 +89,6 @@ export class PlayScene extends Phaser.Scene {
       });
     });
 
-    this.load.image(PLAYER_TEXTURE_KEY, PLAYER_ASSET_PATH);
     this.load.audio(EVENT_SFX.click, 'assets/sfx/ui_click.wav');
     this.load.audio(EVENT_SFX.success, 'assets/sfx/puzzle_success.wav');
     this.load.audio(EVENT_SFX.error, 'assets/sfx/puzzle_error.wav');
@@ -123,17 +117,10 @@ export class PlayScene extends Phaser.Scene {
     });
     this.descriptionLabel.setDepth(12);
 
-    this.actor = this.createActor();
-    this.startActorFloat();
-
     this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.stopAmbient();
       this.clearHotspots();
       this.clearDecorations();
-      if (this.actorFloatTween) {
-        this.actorFloatTween.stop();
-        this.actorFloatTween = null;
-      }
     });
 
     this.isReady = true;
@@ -161,48 +148,6 @@ export class PlayScene extends Phaser.Scene {
     });
   }
 
-  private createActor(): Phaser.GameObjects.Container {
-    const shadow = this.add.ellipse(0, 10, 34, 12, 0x000000, 0.35);
-    let actorParts: Phaser.GameObjects.GameObject[] = [shadow];
-
-    if (this.textures.exists(PLAYER_TEXTURE_KEY)) {
-      const sprite = this.add.image(0, -20, PLAYER_TEXTURE_KEY);
-      sprite.setScale(0.35);
-      actorParts = [shadow, sprite];
-    } else {
-      const body = this.add.rectangle(0, -3, 24, 34, 0xc4d1dd);
-      const head = this.add.circle(0, -26, 14, 0xd9e6ef);
-      const eyeLeft = this.add.circle(-5, -28, 2, 0x21364c);
-      const eyeRight = this.add.circle(5, -28, 2, 0x21364c);
-      actorParts = [shadow, body, head, eyeLeft, eyeRight];
-    }
-
-    const actor = this.add.container(120, 455, actorParts);
-    actor.setDepth(32);
-
-    return actor;
-  }
-
-  private startActorFloat(): void {
-    if (!this.actor) {
-      return;
-    }
-
-    if (this.actorFloatTween) {
-      this.actorFloatTween.stop();
-      this.actorFloatTween = null;
-    }
-
-    this.actorFloatTween = this.tweens.add({
-      targets: this.actor,
-      y: this.actor.y - 3,
-      yoyo: true,
-      repeat: -1,
-      duration: 1200,
-      ease: 'Sine.easeInOut',
-    });
-  }
-
   private animateTapFeedback(x: number, y: number): void {
     const ring = this.add.circle(x, y, 8, 0xf7ede2, 0.35).setDepth(40);
     this.tweens.add({
@@ -212,28 +157,6 @@ export class PlayScene extends Phaser.Scene {
       duration: 220,
       ease: 'Quad.easeOut',
       onComplete: () => ring.destroy(),
-    });
-  }
-
-  private moveActorToHotspot(hotspot: HotspotDef, onArrive: () => void): void {
-    const targetX = Phaser.Math.Clamp(hotspot.x + hotspot.w / 2, 90, BASE_WIDTH - 90);
-    const targetY = Phaser.Math.Clamp(hotspot.y + hotspot.h + 12, 330, 475);
-
-    this.tweens.killTweensOf(this.actor);
-    if (this.actorFloatTween) {
-      this.actorFloatTween.stop();
-      this.actorFloatTween = null;
-    }
-    this.tweens.add({
-      targets: this.actor,
-      x: targetX,
-      y: targetY,
-      duration: 170,
-      ease: 'Quad.easeOut',
-      onComplete: () => {
-        this.startActorFloat();
-        onArrive();
-      },
     });
   }
 
@@ -422,9 +345,7 @@ export class PlayScene extends Phaser.Scene {
           const centerX = hotspot.x + hotspot.w / 2;
           const centerY = hotspot.y + hotspot.h / 2;
           this.animateTapFeedback(centerX, centerY);
-          this.moveActorToHotspot(hotspot, () => {
-            this.hooks.onHotspotPressed(hotspot);
-          });
+          this.hooks.onHotspotPressed(hotspot);
         });
       }
 
