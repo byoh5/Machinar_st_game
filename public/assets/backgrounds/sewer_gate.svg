@@ -1,38 +1,60 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
     <linearGradient id="wall" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#324d4f"/>
-      <stop offset="100%" stop-color="#1b2f31"/>
+      <stop offset="0%" stop-color="#37575a"/>
+      <stop offset="100%" stop-color="#1e3437"/>
     </linearGradient>
     <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#2a3f40"/>
-      <stop offset="100%" stop-color="#18282a"/>
+      <stop offset="0%" stop-color="#2b4447"/>
+      <stop offset="100%" stop-color="#182b2d"/>
     </linearGradient>
-    <radialGradient id="centerGlow" cx="0.5" cy="0.48" r="0.34">
-      <stop offset="0%" stop-color="#9fd3c3" stop-opacity="0.38"/>
-      <stop offset="100%" stop-color="#9fd3c3" stop-opacity="0"/>
+    <linearGradient id="water" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#4d6f73" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#1f3437" stop-opacity="0.35"/>
+    </linearGradient>
+    <radialGradient id="gateGlow" cx="0.54" cy="0.48" r="0.32">
+      <stop offset="0%" stop-color="#9fd7c5" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#9fd7c5" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
   <rect width="960" height="540" fill="url(#wall)"/>
-  <rect y="390" width="960" height="150" fill="url(#floor)"/>
+  <rect y="386" width="960" height="154" fill="url(#floor)"/>
 
-  <rect x="58" y="150" width="124" height="288" rx="12" fill="#2b4345"/>
-  <rect x="82" y="188" width="76" height="210" rx="8" fill="#1a2d2f"/>
+  <g opacity="0.55">
+    <path d="M0 114H960" stroke="#6f9294" stroke-width="10"/>
+    <path d="M0 182H960" stroke="#5b7b7d" stroke-width="8"/>
+    <path d="M0 246H418" stroke="#4d6769" stroke-width="6"/>
+    <path d="M642 246H960" stroke="#4d6769" stroke-width="6"/>
+  </g>
 
-  <circle cx="530" cy="270" r="150" fill="#284244" stroke="#91bfb2" stroke-width="12"/>
-  <circle cx="530" cy="270" r="88" fill="#506d6a" stroke="#c7e3d9" stroke-width="8"/>
-  <circle cx="530" cy="270" r="38" fill="#254143"/>
-  <path d="M530 120V202M530 338V420M380 270H462M598 270H680M424 164L468 208M592 332L636 376M636 164L592 208M424 376L468 332" stroke="#d2e9df" stroke-width="10" stroke-linecap="round"/>
+  <g>
+    <rect x="52" y="146" width="136" height="292" rx="12" fill="#2e4749"/>
+    <rect x="82" y="186" width="76" height="214" rx="8" fill="#1a2f31"/>
+    <rect x="98" y="212" width="44" height="10" rx="5" fill="#7ca49a"/>
+    <rect x="98" y="236" width="44" height="10" rx="5" fill="#7ca49a"/>
+    <rect x="98" y="260" width="44" height="10" rx="5" fill="#7ca49a"/>
+  </g>
 
-  <rect x="786" y="124" width="132" height="316" rx="12" fill="#2f4447"/>
-  <rect x="818" y="160" width="68" height="250" rx="10" fill="#6a8b82"/>
+  <g>
+    <circle cx="530" cy="270" r="156" fill="#2b4648" stroke="#9bc7ba" stroke-width="12"/>
+    <circle cx="530" cy="270" r="90" fill="#5a7875" stroke="#d0e9e0" stroke-width="8"/>
+    <circle cx="530" cy="270" r="40" fill="#284649"/>
+    <path d="M530 114V200M530 340V426M374 270H460M600 270H686M422 162L468 208M592 332L638 378M638 162L592 208M422 378L468 332" stroke="#d9efe7" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="530" cy="270" r="124" fill="none" stroke="#7ea89f" stroke-width="5" stroke-dasharray="10 10" opacity="0.8"/>
+  </g>
 
-  <path d="M0 116H960" stroke="#6d8d8e" stroke-width="10"/>
-  <path d="M0 186H960" stroke="#587678" stroke-width="8"/>
-  <path d="M0 248H420" stroke="#4f6668" stroke-width="6"/>
-  <path d="M640 248H960" stroke="#4f6668" stroke-width="6"/>
+  <g>
+    <rect x="782" y="120" width="136" height="318" rx="12" fill="#31484b"/>
+    <rect x="816" y="156" width="68" height="252" rx="10" fill="#6f9087"/>
+    <rect x="834" y="182" width="32" height="202" rx="8" fill="#223b3e"/>
+  </g>
 
-  <ellipse cx="530" cy="260" rx="190" ry="170" fill="url(#centerGlow)"/>
-  <rect y="430" width="960" height="16" fill="#0f1c1e" opacity="0.36"/>
+  <g opacity="0.5">
+    <path d="M96 116v32M140 116v20M214 116v28M612 116v26M688 116v30M812 116v22" stroke="#b7d9cf" stroke-width="3"/>
+    <path d="M96 186v26M154 186v18M232 186v22M680 186v18M756 186v26M844 186v20" stroke="#b7d9cf" stroke-width="3"/>
+  </g>
+
+  <path d="M0 432C170 412 320 448 480 432C640 416 790 450 960 432V540H0Z" fill="url(#water)"/>
+  <ellipse cx="530" cy="258" rx="200" ry="172" fill="url(#gateGlow)"/>
 </svg>

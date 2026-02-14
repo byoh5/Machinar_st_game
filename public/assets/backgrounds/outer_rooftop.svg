@@ -1,39 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
     <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#35507b"/>
-      <stop offset="100%" stop-color="#18263f"/>
+      <stop offset="0%" stop-color="#385785"/>
+      <stop offset="100%" stop-color="#1b2b46"/>
     </linearGradient>
     <linearGradient id="roof" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#273a58"/>
-      <stop offset="100%" stop-color="#1a2a42"/>
+      <stop offset="0%" stop-color="#2b4060"/>
+      <stop offset="100%" stop-color="#1c2d46"/>
     </linearGradient>
-    <radialGradient id="beaconGlow" cx="0.79" cy="0.53" r="0.3">
-      <stop offset="0%" stop-color="#99e7ff" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#99e7ff" stop-opacity="0"/>
+    <radialGradient id="beacon" cx="0.79" cy="0.53" r="0.3">
+      <stop offset="0%" stop-color="#9de8ff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#9de8ff" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
   <rect width="960" height="540" fill="url(#sky)"/>
-  <path d="M0 242L86 204L186 222L312 184L436 214L578 180L712 210L838 176L960 208V540H0Z" fill="#1a2b46" opacity="0.62"/>
-  <rect y="406" width="960" height="134" fill="url(#roof)"/>
+  <path d="M0 244L88 206L194 226L316 186L438 214L580 180L714 210L842 176L960 204V540H0Z" fill="#1b2f4b" opacity="0.66"/>
+  <path d="M0 276L106 246L218 264L340 230L476 254L624 220L770 246L960 216V540H0Z" fill="#22384f" opacity="0.52"/>
+  <rect y="404" width="960" height="136" fill="url(#roof)"/>
 
-  <rect x="76" y="146" width="126" height="304" rx="12" fill="#2d4163"/>
-  <rect x="102" y="184" width="74" height="236" rx="8" fill="#172843"/>
+  <g>
+    <rect x="72" y="142" width="132" height="308" rx="12" fill="#304766"/>
+    <rect x="100" y="178" width="76" height="242" rx="8" fill="#172b44"/>
+    <path d="M82 164h112M82 188h112M82 212h112" stroke="#4f6f97" stroke-width="4"/>
+  </g>
 
-  <rect x="292" y="188" width="280" height="214" rx="12" fill="#36527b"/>
-  <rect x="326" y="226" width="220" height="146" rx="10" fill="#1a3150"/>
-  <rect x="356" y="250" width="160" height="40" rx="8" fill="#4f76a5"/>
-  <circle cx="396" cy="270" r="10" fill="#90e4ff"/>
-  <circle cx="434" cy="270" r="10" fill="#f1c47d"/>
-  <circle cx="472" cy="270" r="10" fill="#90e4ff"/>
+  <g>
+    <rect x="286" y="184" width="286" height="220" rx="12" fill="#39567f"/>
+    <rect x="322" y="224" width="224" height="148" rx="10" fill="#1d3657"/>
+    <rect x="356" y="248" width="162" height="42" rx="8" fill="#577ead"/>
+    <circle cx="396" cy="269" r="11" fill="#92e6ff"/>
+    <circle cx="436" cy="269" r="11" fill="#f4c984"/>
+    <circle cx="476" cy="269" r="11" fill="#92e6ff"/>
+    <path d="M352 330h168" stroke="#6e95c1" stroke-width="4"/>
+  </g>
 
-  <rect x="648" y="142" width="260" height="298" rx="14" fill="#3f5f8f"/>
-  <rect x="700" y="178" width="156" height="230" rx="12" fill="#122845"/>
-  <circle cx="778" cy="286" r="34" fill="#99e7ff"/>
-  <circle cx="778" cy="286" r="14" fill="#1d4d71"/>
-  <path d="M778 120V168M744 136L758 160M812 136L798 160" stroke="#99e7ff" stroke-width="7" stroke-linecap="round"/>
+  <g>
+    <rect x="646" y="138" width="264" height="302" rx="14" fill="#436392"/>
+    <rect x="700" y="174" width="158" height="234" rx="12" fill="#142d4b"/>
+    <circle cx="778" cy="286" r="36" fill="#9de8ff"/>
+    <circle cx="778" cy="286" r="14" fill="#1f4e74"/>
+    <path d="M778 118V166M744 136L758 160M812 136L798 160" stroke="#9de8ff" stroke-width="7" stroke-linecap="round"/>
+    <rect x="724" y="202" width="108" height="16" rx="8" fill="#85d6f5" opacity="0.7"/>
+  </g>
 
-  <ellipse cx="770" cy="282" rx="210" ry="176" fill="url(#beaconGlow)"/>
-  <path d="M0 454H960" stroke="#3f5e88" stroke-width="4" opacity="0.45"/>
+  <g opacity="0.52">
+    <path d="M114 404l38-56h48l26 42h62l30-48h46l40 62h66l28-44h52l30 44" stroke="#3f5f86" stroke-width="4" fill="none"/>
+    <path d="M0 452H960" stroke="#47678f" stroke-width="5"/>
+  </g>
+
+  <g opacity="0.44">
+    <path d="M50 90l60 0" stroke="#b9dfff" stroke-width="3"/>
+    <path d="M148 72l46 0" stroke="#b9dfff" stroke-width="3"/>
+    <path d="M242 98l54 0" stroke="#b9dfff" stroke-width="3"/>
+    <path d="M742 84l64 0" stroke="#b9dfff" stroke-width="3"/>
+    <path d="M836 66l48 0" stroke="#b9dfff" stroke-width="3"/>
+  </g>
+
+  <ellipse cx="770" cy="284" rx="224" ry="184" fill="url(#beacon)"/>
 </svg>

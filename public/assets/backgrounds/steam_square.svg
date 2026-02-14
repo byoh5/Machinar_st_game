@@ -1,39 +1,54 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
-    <linearGradient id="haze" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#5a6675"/>
-      <stop offset="100%" stop-color="#293a4b"/>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#5f6e7f"/>
+      <stop offset="100%" stop-color="#2f4355"/>
     </linearGradient>
     <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#334658"/>
-      <stop offset="100%" stop-color="#263646"/>
+      <stop offset="0%" stop-color="#384d61"/>
+      <stop offset="100%" stop-color="#273848"/>
     </linearGradient>
-    <radialGradient id="mist" cx="0.5" cy="0.35" r="0.55">
-      <stop offset="0%" stop-color="#d5e2ef" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#d5e2ef" stop-opacity="0"/>
+    <radialGradient id="steam" cx="0.48" cy="0.3" r="0.55">
+      <stop offset="0%" stop-color="#dde8f2" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#dde8f2" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
-  <rect width="960" height="540" fill="url(#haze)"/>
-  <path d="M0 236L82 202L196 220L312 182L430 214L564 176L684 208L812 176L960 214V540H0Z" fill="#263747" opacity="0.62"/>
-  <rect y="388" width="960" height="152" fill="url(#floor)"/>
+  <rect width="960" height="540" fill="url(#sky)"/>
+  <path d="M0 238L92 204L196 226L318 188L434 218L572 182L696 210L826 178L960 206V540H0Z" fill="#273a4d" opacity="0.66"/>
+  <rect y="386" width="960" height="154" fill="url(#floor)"/>
 
-  <rect x="66" y="164" width="196" height="258" rx="12" fill="#566777"/>
-  <rect x="96" y="206" width="138" height="96" rx="10" fill="#2a3c4d"/>
-  <ellipse cx="180" cy="366" rx="50" ry="34" fill="#d6a05e"/>
+  <g>
+    <rect x="62" y="162" width="208" height="260" rx="12" fill="#586c7e"/>
+    <rect x="96" y="206" width="140" height="100" rx="10" fill="#2d4255"/>
+    <ellipse cx="182" cy="366" rx="52" ry="36" fill="#d7a15f"/>
+  </g>
 
-  <rect x="292" y="186" width="264" height="236" rx="12" fill="#616d79"/>
-  <rect x="322" y="218" width="206" height="108" rx="10" fill="#233746"/>
-  <rect x="478" y="236" width="78" height="90" rx="8" fill="#39597a"/>
-  <circle cx="504" cy="278" r="10" fill="#7fd3ff"/>
+  <g>
+    <rect x="286" y="182" width="276" height="240" rx="12" fill="#64727e"/>
+    <rect x="320" y="218" width="212" height="112" rx="10" fill="#263a4a"/>
+    <rect x="474" y="236" width="88" height="94" rx="8" fill="#3b5d7f"/>
+    <circle cx="504" cy="278" r="11" fill="#82d7ff"/>
+    <rect x="350" y="348" width="170" height="50" rx="8" fill="#6d7f8c"/>
+  </g>
 
-  <rect x="614" y="148" width="276" height="274" rx="12" fill="#66798b"/>
-  <rect x="778" y="204" width="96" height="218" rx="10" fill="#2a3f57"/>
-  <rect x="804" y="236" width="44" height="156" rx="8" fill="#13263a"/>
+  <g>
+    <rect x="606" y="144" width="290" height="278" rx="12" fill="#6b7f92"/>
+    <rect x="772" y="202" width="106" height="220" rx="10" fill="#2b425a"/>
+    <rect x="802" y="236" width="46" height="158" rx="8" fill="#152b41"/>
+    <circle cx="825" cy="316" r="12" fill="#95e4ff"/>
+  </g>
 
-  <rect x="708" y="112" width="14" height="222" fill="#4e616e"/>
-  <circle cx="715" cy="108" r="8" fill="#f6cf8d"/>
-  <ellipse cx="715" cy="246" rx="108" ry="124" fill="#f6cf8d" opacity="0.18"/>
+  <g opacity="0.34">
+    <path d="M0 446H960" stroke="#49627a" stroke-width="4"/>
+    <path d="M0 466H960" stroke="#334d63" stroke-width="3"/>
+  </g>
 
-  <ellipse cx="484" cy="182" rx="420" ry="180" fill="url(#mist)"/>
+  <g opacity="0.4">
+    <ellipse cx="168" cy="250" rx="66" ry="34" fill="#deecf6"/>
+    <ellipse cx="262" cy="226" rx="82" ry="40" fill="#deecf6"/>
+    <ellipse cx="586" cy="220" rx="78" ry="36" fill="#deecf6"/>
+  </g>
+
+  <ellipse cx="480" cy="170" rx="430" ry="180" fill="url(#steam)"/>
 </svg>

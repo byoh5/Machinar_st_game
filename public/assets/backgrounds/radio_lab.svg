@@ -1,38 +1,63 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
     <linearGradient id="wall" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#615347"/>
-      <stop offset="100%" stop-color="#302923"/>
+      <stop offset="0%" stop-color="#685849"/>
+      <stop offset="100%" stop-color="#352d26"/>
     </linearGradient>
     <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#47382e"/>
-      <stop offset="100%" stop-color="#33271f"/>
+      <stop offset="0%" stop-color="#4c3d32"/>
+      <stop offset="100%" stop-color="#332820"/>
     </linearGradient>
-    <radialGradient id="signalGlow" cx="0.63" cy="0.46" r="0.25">
-      <stop offset="0%" stop-color="#9bd6f4" stop-opacity="0.4"/>
-      <stop offset="100%" stop-color="#9bd6f4" stop-opacity="0"/>
+    <radialGradient id="signal" cx="0.63" cy="0.46" r="0.26">
+      <stop offset="0%" stop-color="#9ddaf8" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#9ddaf8" stop-opacity="0"/>
     </radialGradient>
   </defs>
 
   <rect width="960" height="540" fill="url(#wall)"/>
-  <rect y="392" width="960" height="148" fill="url(#floor)"/>
+  <rect y="390" width="960" height="150" fill="url(#floor)"/>
 
-  <rect x="68" y="136" width="126" height="304" rx="12" fill="#4a3e34"/>
-  <rect x="94" y="174" width="74" height="234" rx="8" fill="#261e19"/>
+  <g opacity="0.44">
+    <path d="M0 122H960" stroke="#7f6852" stroke-width="8"/>
+    <path d="M0 184H960" stroke="#69533f" stroke-width="6"/>
+  </g>
 
-  <rect x="200" y="276" width="270" height="142" rx="12" fill="#705842"/>
-  <rect x="228" y="302" width="214" height="30" rx="8" fill="#8f7253"/>
-  <circle cx="338" cy="352" r="20" fill="#9eb2bd"/>
-  <rect x="284" y="344" width="42" height="12" rx="6" fill="#e4bf94"/>
+  <g>
+    <rect x="66" y="132" width="132" height="308" rx="12" fill="#504236"/>
+    <rect x="96" y="170" width="72" height="238" rx="8" fill="#2a2019"/>
+    <path d="M78 154h108M78 178h108M78 202h108" stroke="#725b46" stroke-width="4"/>
+  </g>
 
-  <rect x="516" y="186" width="236" height="196" rx="12" fill="#83684f"/>
-  <rect x="546" y="216" width="176" height="126" rx="10" fill="#413023"/>
-  <rect x="624" y="238" width="16" height="70" rx="8" fill="#d8d0c0"/>
-  <circle cx="632" cy="314" r="20" fill="#90d6ff"/>
-  <path d="M632 152V190M606 164L616 182M658 164L648 182" stroke="#9bd6f4" stroke-width="6" stroke-linecap="round"/>
+  <g>
+    <rect x="196" y="272" width="278" height="146" rx="12" fill="#755b44"/>
+    <rect x="226" y="300" width="220" height="30" rx="8" fill="#977658"/>
+    <circle cx="340" cy="352" r="22" fill="#a8bbc6"/>
+    <circle cx="340" cy="352" r="8" fill="#60737e"/>
+    <rect x="286" y="344" width="42" height="12" rx="6" fill="#ebc79c"/>
+    <path d="M246 380h180" stroke="#a3805a" stroke-width="4"/>
+  </g>
 
-  <rect x="808" y="118" width="124" height="322" rx="12" fill="#42362d"/>
-  <rect x="838" y="154" width="64" height="256" rx="10" fill="#241b15"/>
+  <g>
+    <rect x="514" y="182" width="240" height="200" rx="12" fill="#8a6e52"/>
+    <rect x="544" y="214" width="180" height="128" rx="10" fill="#443224"/>
+    <rect x="624" y="236" width="16" height="70" rx="8" fill="#ddd4c2"/>
+    <circle cx="632" cy="316" r="22" fill="#93dcff"/>
+    <path d="M632 150V188M606 164L616 182M658 164L648 182" stroke="#9ddaf8" stroke-width="6" stroke-linecap="round"/>
+    <rect x="560" y="232" width="56" height="10" rx="5" fill="#9b7956"/>
+    <rect x="560" y="252" width="56" height="10" rx="5" fill="#9b7956"/>
+    <rect x="560" y="272" width="56" height="10" rx="5" fill="#9b7956"/>
+  </g>
 
-  <ellipse cx="610" cy="248" rx="170" ry="150" fill="url(#signalGlow)"/>
+  <g>
+    <rect x="806" y="114" width="128" height="326" rx="12" fill="#45382d"/>
+    <rect x="836" y="150" width="68" height="260" rx="10" fill="#271d16"/>
+  </g>
+
+  <g opacity="0.5">
+    <path d="M168 272C224 236 264 236 326 272" stroke="#4c3d31" stroke-width="5" fill="none"/>
+    <path d="M326 272C404 228 462 232 540 280" stroke="#4c3d31" stroke-width="5" fill="none"/>
+    <path d="M540 280C618 226 688 232 760 282" stroke="#4c3d31" stroke-width="5" fill="none"/>
+  </g>
+
+  <ellipse cx="612" cy="246" rx="176" ry="156" fill="url(#signal)"/>
 </svg>
