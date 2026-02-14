@@ -1,18 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
     <linearGradient id="wall" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#384f4f"/>
-      <stop offset="100%" stop-color="#1b2d2d"/>
+      <stop offset="0%" stop-color="#324d4f"/>
+      <stop offset="100%" stop-color="#1b2f31"/>
     </linearGradient>
+    <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2a3f40"/>
+      <stop offset="100%" stop-color="#18282a"/>
+    </linearGradient>
+    <radialGradient id="centerGlow" cx="0.5" cy="0.48" r="0.34">
+      <stop offset="0%" stop-color="#9fd3c3" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#9fd3c3" stop-opacity="0"/>
+    </radialGradient>
   </defs>
+
   <rect width="960" height="540" fill="url(#wall)"/>
-  <rect y="400" width="960" height="140" fill="#243333"/>
-  <rect x="65" y="160" width="110" height="280" fill="#2f3f3f"/>
-  <circle cx="530" cy="270" r="130" fill="#2e4646" stroke="#9ec0b2" stroke-width="12"/>
-  <circle cx="530" cy="270" r="56" fill="#56736f"/>
-  <rect x="790" y="130" width="120" height="320" fill="#2f3f3f"/>
-  <rect x="825" y="160" width="46" height="260" fill="#6f887f"/>
-  <line x1="0" y1="120" x2="960" y2="120" stroke="#6b8484" stroke-width="6"/>
-  <line x1="0" y1="190" x2="960" y2="190" stroke="#6b8484" stroke-width="6"/>
-  <text x="38" y="62" fill="#d4efe7" font-size="34" font-family="Courier New">SEWER CONTROL</text>
+  <rect y="390" width="960" height="150" fill="url(#floor)"/>
+
+  <rect x="58" y="150" width="124" height="288" rx="12" fill="#2b4345"/>
+  <rect x="82" y="188" width="76" height="210" rx="8" fill="#1a2d2f"/>
+
+  <circle cx="530" cy="270" r="150" fill="#284244" stroke="#91bfb2" stroke-width="12"/>
+  <circle cx="530" cy="270" r="88" fill="#506d6a" stroke="#c7e3d9" stroke-width="8"/>
+  <circle cx="530" cy="270" r="38" fill="#254143"/>
+  <path d="M530 120V202M530 338V420M380 270H462M598 270H680M424 164L468 208M592 332L636 376M636 164L592 208M424 376L468 332" stroke="#d2e9df" stroke-width="10" stroke-linecap="round"/>
+
+  <rect x="786" y="124" width="132" height="316" rx="12" fill="#2f4447"/>
+  <rect x="818" y="160" width="68" height="250" rx="10" fill="#6a8b82"/>
+
+  <path d="M0 116H960" stroke="#6d8d8e" stroke-width="10"/>
+  <path d="M0 186H960" stroke="#587678" stroke-width="8"/>
+  <path d="M0 248H420" stroke="#4f6668" stroke-width="6"/>
+  <path d="M640 248H960" stroke="#4f6668" stroke-width="6"/>
+
+  <ellipse cx="530" cy="260" rx="190" ry="170" fill="url(#centerGlow)"/>
+  <rect y="430" width="960" height="16" fill="#0f1c1e" opacity="0.36"/>
 </svg>

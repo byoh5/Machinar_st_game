@@ -1,20 +1,48 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
     <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#32485d"/>
-      <stop offset="100%" stop-color="#1d2b38"/>
+      <stop offset="0%" stop-color="#2b3f57"/>
+      <stop offset="58%" stop-color="#1f2f42"/>
+      <stop offset="100%" stop-color="#162331"/>
     </linearGradient>
+    <linearGradient id="ground" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#3a4a58"/>
+      <stop offset="100%" stop-color="#273541"/>
+    </linearGradient>
+    <radialGradient id="lampGlow" cx="0.5" cy="0.4" r="0.52">
+      <stop offset="0%" stop-color="#f7cf8b" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#f7cf8b" stop-opacity="0"/>
+    </radialGradient>
   </defs>
+
   <rect width="960" height="540" fill="url(#sky)"/>
-  <rect y="370" width="960" height="170" fill="#283947"/>
-  <rect x="40" y="220" width="180" height="210" fill="#495e6f"/>
-  <rect x="70" y="250" width="120" height="40" fill="#202b33"/>
-  <rect x="290" y="180" width="230" height="250" fill="#4b4f56"/>
-  <rect x="330" y="210" width="150" height="100" fill="#2a313a"/>
-  <rect x="620" y="160" width="260" height="270" fill="#55545e"/>
-  <rect x="770" y="220" width="90" height="210" fill="#243647"/>
-  <circle cx="145" cy="350" r="45" fill="#b66f3b"/>
-  <circle cx="380" cy="360" r="55" fill="#86939d"/>
-  <rect x="430" y="235" width="120" height="90" fill="#c3853f"/>
-  <text x="32" y="62" fill="#d7deea" font-size="34" font-family="Courier New">SCRAP YARD</text>
+  <path d="M0 240L80 210L140 226L230 192L330 224L430 178L520 206L640 172L740 210L830 176L960 218V540H0Z" fill="#1a2a38" opacity="0.65"/>
+  <rect y="352" width="960" height="188" fill="url(#ground)"/>
+
+  <rect x="26" y="218" width="210" height="220" rx="10" fill="#4f6272"/>
+  <rect x="42" y="250" width="178" height="68" rx="8" fill="#223342"/>
+  <rect x="56" y="334" width="38" height="84" fill="#192633"/>
+  <rect x="106" y="334" width="38" height="84" fill="#192633"/>
+  <rect x="156" y="334" width="38" height="84" fill="#192633"/>
+
+  <rect x="274" y="176" width="294" height="264" rx="12" fill="#4a5058"/>
+  <rect x="306" y="218" width="230" height="108" rx="10" fill="#1f2a33"/>
+  <rect x="432" y="238" width="106" height="90" rx="8" fill="#32506a"/>
+  <circle cx="463" cy="282" r="10" fill="#f5c47f"/>
+  <circle cx="502" cy="282" r="10" fill="#89d2ff"/>
+
+  <rect x="624" y="148" width="288" height="292" rx="12" fill="#55606e"/>
+  <rect x="772" y="214" width="116" height="226" rx="10" fill="#223849"/>
+  <rect x="796" y="248" width="68" height="160" rx="8" fill="#102230"/>
+  <circle cx="830" cy="316" r="26" fill="#8bc8ef"/>
+
+  <ellipse cx="164" cy="414" rx="72" ry="40" fill="#8b673f"/>
+  <ellipse cx="336" cy="400" rx="82" ry="46" fill="#7e8a96"/>
+  <ellipse cx="224" cy="438" rx="120" ry="36" fill="#2a3945" opacity="0.55"/>
+
+  <rect x="708" y="120" width="14" height="226" fill="#4a5862"/>
+  <circle cx="715" cy="116" r="8" fill="#f7cf8b"/>
+  <ellipse cx="715" cy="256" rx="112" ry="132" fill="url(#lampGlow)"/>
+
+  <path d="M0 458H960" stroke="#405364" stroke-width="4" opacity="0.4"/>
 </svg>

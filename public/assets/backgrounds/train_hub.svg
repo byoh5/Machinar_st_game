@@ -1,15 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
-    <linearGradient id="hub" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#3d4f5b"/>
-      <stop offset="100%" stop-color="#202d36"/>
+    <linearGradient id="wall" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#3d505f"/>
+      <stop offset="100%" stop-color="#1e2d36"/>
     </linearGradient>
+    <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#263742"/>
+      <stop offset="100%" stop-color="#1a2830"/>
+    </linearGradient>
+    <radialGradient id="hubGlow" cx="0.53" cy="0.52" r="0.33">
+      <stop offset="0%" stop-color="#b3d4ea" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#b3d4ea" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="960" height="540" fill="url(#hub)"/>
-  <rect y="400" width="960" height="140" fill="#22313b"/>
-  <rect x="80" y="140" width="120" height="290" fill="#2f404b"/>
-  <rect x="380" y="160" width="250" height="240" fill="#324957"/>
-  <circle cx="505" cy="280" r="95" fill="#253743" stroke="#9cb7c5" stroke-width="10"/>
-  <rect x="790" y="130" width="120" height="300" fill="#2f404b"/>
-  <text x="36" y="60" fill="#e6f2ff" font-size="34" font-family="Courier New">TRAIN HUB</text>
+
+  <rect width="960" height="540" fill="url(#wall)"/>
+  <rect y="396" width="960" height="144" fill="url(#floor)"/>
+
+  <rect x="76" y="136" width="128" height="300" rx="12" fill="#304451"/>
+  <rect x="102" y="174" width="76" height="232" rx="8" fill="#1c2d37"/>
+
+  <rect x="360" y="152" width="294" height="248" rx="14" fill="#375062"/>
+  <circle cx="507" cy="276" r="108" fill="#263a47" stroke="#a9c4d5" stroke-width="12"/>
+  <circle cx="507" cy="276" r="58" fill="#5f7d90"/>
+  <circle cx="507" cy="276" r="16" fill="#1e3442"/>
+  <path d="M507 170V214M507 338V382M401 276H445M569 276H613M432 200L462 230M552 322L582 352M582 200L552 230M432 352L462 322" stroke="#d7e8f3" stroke-width="9" stroke-linecap="round"/>
+
+  <rect x="784" y="126" width="130" height="310" rx="12" fill="#2f4450"/>
+  <rect x="818" y="162" width="62" height="248" rx="10" fill="#708a99"/>
+
+  <path d="M0 116H960" stroke="#607888" stroke-width="8"/>
+  <path d="M0 186H960" stroke="#4e6572" stroke-width="6"/>
+  <ellipse cx="510" cy="264" rx="220" ry="170" fill="url(#hubGlow)"/>
 </svg>

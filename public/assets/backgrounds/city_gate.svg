@@ -1,18 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
     <linearGradient id="night" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#27385a"/>
-      <stop offset="100%" stop-color="#141d31"/>
+      <stop offset="0%" stop-color="#2a3d63"/>
+      <stop offset="100%" stop-color="#141f35"/>
     </linearGradient>
+    <linearGradient id="ground" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#212f4a"/>
+      <stop offset="100%" stop-color="#162235"/>
+    </linearGradient>
+    <radialGradient id="gateGlow" cx="0.77" cy="0.52" r="0.28">
+      <stop offset="0%" stop-color="#8fdcff" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#8fdcff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
+
   <rect width="960" height="540" fill="url(#night)"/>
-  <rect y="410" width="960" height="130" fill="#1b253c"/>
-  <rect x="70" y="150" width="110" height="290" fill="#2c3955"/>
-  <rect x="295" y="180" width="280" height="220" fill="#314466"/>
-  <rect x="330" y="220" width="120" height="130" fill="#1f2f49"/>
-  <rect x="650" y="120" width="245" height="320" fill="#3d5280"/>
-  <rect x="700" y="170" width="150" height="220" fill="#102038"/>
-  <circle cx="750" cy="280" r="25" fill="#8dd5ff"/>
-  <circle cx="400" cy="250" r="18" fill="#8dd5ff"/>
-  <text x="36" y="62" fill="#dce6ff" font-size="34" font-family="Courier New">CITY GATE</text>
+  <path d="M0 236L98 190L206 214L340 174L464 208L620 166L762 206L960 176V540H0Z" fill="#16253b" opacity="0.66"/>
+  <rect y="404" width="960" height="136" fill="url(#ground)"/>
+
+  <rect x="68" y="140" width="122" height="300" rx="12" fill="#2d3f61"/>
+  <rect x="94" y="174" width="70" height="236" rx="10" fill="#182840"/>
+
+  <rect x="286" y="176" width="304" height="232" rx="14" fill="#344a70"/>
+  <rect x="322" y="214" width="130" height="140" rx="10" fill="#1d304c"/>
+  <rect x="458" y="214" width="96" height="140" rx="10" fill="#223955"/>
+  <rect x="352" y="252" width="172" height="44" rx="10" fill="#4f6e99"/>
+  <circle cx="392" cy="274" r="10" fill="#8ad8ff"/>
+  <circle cx="430" cy="274" r="10" fill="#f4c479"/>
+  <circle cx="468" cy="274" r="10" fill="#90e6a6"/>
+
+  <rect x="640" y="108" width="268" height="332" rx="14" fill="#425b8b"/>
+  <rect x="696" y="162" width="156" height="246" rx="12" fill="#10223b"/>
+  <circle cx="774" cy="286" r="30" fill="#8fdcff"/>
+  <circle cx="774" cy="286" r="12" fill="#17344f"/>
+  <rect x="716" y="206" width="116" height="18" rx="8" fill="#7abfe9" opacity="0.65"/>
+
+  <ellipse cx="744" cy="280" rx="200" ry="170" fill="url(#gateGlow)"/>
+  <path d="M0 454H960" stroke="#364d72" stroke-width="5" opacity="0.45"/>
 </svg>

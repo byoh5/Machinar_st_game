@@ -1,16 +1,38 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
-    <linearGradient id="lab" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#5a4f44"/>
-      <stop offset="100%" stop-color="#2f2823"/>
+    <linearGradient id="wall" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#615347"/>
+      <stop offset="100%" stop-color="#302923"/>
     </linearGradient>
+    <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#47382e"/>
+      <stop offset="100%" stop-color="#33271f"/>
+    </linearGradient>
+    <radialGradient id="signalGlow" cx="0.63" cy="0.46" r="0.25">
+      <stop offset="0%" stop-color="#9bd6f4" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#9bd6f4" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="960" height="540" fill="url(#lab)"/>
-  <rect y="395" width="960" height="145" fill="#3b3028"/>
-  <rect x="72" y="140" width="120" height="300" fill="#4b3f34"/>
-  <rect x="210" y="280" width="250" height="130" fill="#6f5a45"/>
-  <rect x="520" y="190" width="220" height="190" fill="#7d654d"/>
-  <rect x="810" y="120" width="120" height="320" fill="#3f342b"/>
-  <circle cx="610" cy="260" r="36" fill="#9ecff2"/>
-  <text x="36" y="60" fill="#f4e6d8" font-size="34" font-family="Courier New">RADIO LAB</text>
+
+  <rect width="960" height="540" fill="url(#wall)"/>
+  <rect y="392" width="960" height="148" fill="url(#floor)"/>
+
+  <rect x="68" y="136" width="126" height="304" rx="12" fill="#4a3e34"/>
+  <rect x="94" y="174" width="74" height="234" rx="8" fill="#261e19"/>
+
+  <rect x="200" y="276" width="270" height="142" rx="12" fill="#705842"/>
+  <rect x="228" y="302" width="214" height="30" rx="8" fill="#8f7253"/>
+  <circle cx="338" cy="352" r="20" fill="#9eb2bd"/>
+  <rect x="284" y="344" width="42" height="12" rx="6" fill="#e4bf94"/>
+
+  <rect x="516" y="186" width="236" height="196" rx="12" fill="#83684f"/>
+  <rect x="546" y="216" width="176" height="126" rx="10" fill="#413023"/>
+  <rect x="624" y="238" width="16" height="70" rx="8" fill="#d8d0c0"/>
+  <circle cx="632" cy="314" r="20" fill="#90d6ff"/>
+  <path d="M632 152V190M606 164L616 182M658 164L648 182" stroke="#9bd6f4" stroke-width="6" stroke-linecap="round"/>
+
+  <rect x="808" y="118" width="124" height="322" rx="12" fill="#42362d"/>
+  <rect x="838" y="154" width="64" height="256" rx="10" fill="#241b15"/>
+
+  <ellipse cx="610" cy="248" rx="170" ry="150" fill="url(#signalGlow)"/>
 </svg>

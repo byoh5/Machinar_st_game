@@ -1,16 +1,39 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
   <defs>
-    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="#4c5968"/>
-      <stop offset="100%" stop-color="#273646"/>
+    <linearGradient id="haze" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#5a6675"/>
+      <stop offset="100%" stop-color="#293a4b"/>
     </linearGradient>
+    <linearGradient id="floor" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#334658"/>
+      <stop offset="100%" stop-color="#263646"/>
+    </linearGradient>
+    <radialGradient id="mist" cx="0.5" cy="0.35" r="0.55">
+      <stop offset="0%" stop-color="#d5e2ef" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#d5e2ef" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="960" height="540" fill="url(#bg)"/>
-  <rect y="390" width="960" height="150" fill="#2d3c4d"/>
-  <rect x="70" y="170" width="180" height="250" fill="#556575"/>
-  <rect x="300" y="190" width="240" height="230" fill="#5f6872"/>
-  <rect x="620" y="150" width="260" height="270" fill="#657688"/>
-  <circle cx="185" cy="356" r="40" fill="#d8a35f"/>
-  <circle cx="385" cy="355" r="48" fill="#9ea8b2"/>
-  <text x="34" y="60" fill="#ecf3ff" font-size="34" font-family="Courier New">STEAM SQUARE</text>
+
+  <rect width="960" height="540" fill="url(#haze)"/>
+  <path d="M0 236L82 202L196 220L312 182L430 214L564 176L684 208L812 176L960 214V540H0Z" fill="#263747" opacity="0.62"/>
+  <rect y="388" width="960" height="152" fill="url(#floor)"/>
+
+  <rect x="66" y="164" width="196" height="258" rx="12" fill="#566777"/>
+  <rect x="96" y="206" width="138" height="96" rx="10" fill="#2a3c4d"/>
+  <ellipse cx="180" cy="366" rx="50" ry="34" fill="#d6a05e"/>
+
+  <rect x="292" y="186" width="264" height="236" rx="12" fill="#616d79"/>
+  <rect x="322" y="218" width="206" height="108" rx="10" fill="#233746"/>
+  <rect x="478" y="236" width="78" height="90" rx="8" fill="#39597a"/>
+  <circle cx="504" cy="278" r="10" fill="#7fd3ff"/>
+
+  <rect x="614" y="148" width="276" height="274" rx="12" fill="#66798b"/>
+  <rect x="778" y="204" width="96" height="218" rx="10" fill="#2a3f57"/>
+  <rect x="804" y="236" width="44" height="156" rx="8" fill="#13263a"/>
+
+  <rect x="708" y="112" width="14" height="222" fill="#4e616e"/>
+  <circle cx="715" cy="108" r="8" fill="#f6cf8d"/>
+  <ellipse cx="715" cy="246" rx="108" ry="124" fill="#f6cf8d" opacity="0.18"/>
+
+  <ellipse cx="484" cy="182" rx="420" ry="180" fill="url(#mist)"/>
 </svg>
