@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <linearGradient id="room" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#5a4b38"/>
+      <stop offset="100%" stop-color="#2f271f"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#room)"/>
+  <rect y="395" width="960" height="145" fill="#362b20"/>
+  <rect x="68" y="135" width="120" height="295" fill="#45362a"/>
+  <circle cx="510" cy="240" r="120" fill="#362a20" stroke="#b7956b" stroke-width="10"/>
+  <circle cx="510" cy="240" r="78" fill="#c2ac8a"/>
+  <line x1="510" y1="240" x2="510" y2="190" stroke="#5d4324" stroke-width="8"/>
+  <line x1="510" y1="240" x2="548" y2="240" stroke="#5d4324" stroke-width="8"/>
+  <rect x="220" y="285" width="220" height="130" fill="#6d5339"/>
+  <rect x="540" y="205" width="200" height="170" fill="#7f6245"/>
+  <rect x="815" y="120" width="115" height="320" fill="#3f3227"/>
+  <text x="34" y="62" fill="#f2e5cf" font-size="34" font-family="Courier New">CLOCK TOWER</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <linearGradient id="night" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#27385a"/>
+      <stop offset="100%" stop-color="#141d31"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#night)"/>
+  <rect y="410" width="960" height="130" fill="#1b253c"/>
+  <rect x="70" y="150" width="110" height="290" fill="#2c3955"/>
+  <rect x="295" y="180" width="280" height="220" fill="#314466"/>
+  <rect x="330" y="220" width="120" height="130" fill="#1f2f49"/>
+  <rect x="650" y="120" width="245" height="320" fill="#3d5280"/>
+  <rect x="700" y="170" width="150" height="220" fill="#102038"/>
+  <circle cx="750" cy="280" r="25" fill="#8dd5ff"/>
+  <circle cx="400" cy="250" r="18" fill="#8dd5ff"/>
+  <text x="36" y="62" fill="#dce6ff" font-size="34" font-family="Courier New">CITY GATE</text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#32485d"/>
+      <stop offset="100%" stop-color="#1d2b38"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#sky)"/>
+  <rect y="370" width="960" height="170" fill="#283947"/>
+  <rect x="40" y="220" width="180" height="210" fill="#495e6f"/>
+  <rect x="70" y="250" width="120" height="40" fill="#202b33"/>
+  <rect x="290" y="180" width="230" height="250" fill="#4b4f56"/>
+  <rect x="330" y="210" width="150" height="100" fill="#2a313a"/>
+  <rect x="620" y="160" width="260" height="270" fill="#55545e"/>
+  <rect x="770" y="220" width="90" height="210" fill="#243647"/>
+  <circle cx="145" cy="350" r="45" fill="#b66f3b"/>
+  <circle cx="380" cy="360" r="55" fill="#86939d"/>
+  <rect x="430" y="235" width="120" height="90" fill="#c3853f"/>
+  <text x="32" y="62" fill="#d7deea" font-size="34" font-family="Courier New">SCRAP YARD</text>
+</svg>

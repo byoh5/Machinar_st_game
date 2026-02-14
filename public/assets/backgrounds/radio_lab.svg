@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <linearGradient id="lab" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#5a4f44"/>
+      <stop offset="100%" stop-color="#2f2823"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#lab)"/>
+  <rect y="395" width="960" height="145" fill="#3b3028"/>
+  <rect x="72" y="140" width="120" height="300" fill="#4b3f34"/>
+  <rect x="210" y="280" width="250" height="130" fill="#6f5a45"/>
+  <rect x="520" y="190" width="220" height="190" fill="#7d654d"/>
+  <rect x="810" y="120" width="120" height="320" fill="#3f342b"/>
+  <circle cx="610" cy="260" r="36" fill="#9ecff2"/>
+  <text x="36" y="60" fill="#f4e6d8" font-size="34" font-family="Courier New">RADIO LAB</text>
+</svg>

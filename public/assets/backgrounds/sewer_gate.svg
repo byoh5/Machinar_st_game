@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <linearGradient id="wall" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#384f4f"/>
+      <stop offset="100%" stop-color="#1b2d2d"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#wall)"/>
+  <rect y="400" width="960" height="140" fill="#243333"/>
+  <rect x="65" y="160" width="110" height="280" fill="#2f3f3f"/>
+  <circle cx="530" cy="270" r="130" fill="#2e4646" stroke="#9ec0b2" stroke-width="12"/>
+  <circle cx="530" cy="270" r="56" fill="#56736f"/>
+  <rect x="790" y="130" width="120" height="320" fill="#2f3f3f"/>
+  <rect x="825" y="160" width="46" height="260" fill="#6f887f"/>
+  <line x1="0" y1="120" x2="960" y2="120" stroke="#6b8484" stroke-width="6"/>
+  <line x1="0" y1="190" x2="960" y2="190" stroke="#6b8484" stroke-width="6"/>
+  <text x="38" y="62" fill="#d4efe7" font-size="34" font-family="Courier New">SEWER CONTROL</text>
+</svg>

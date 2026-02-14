@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <linearGradient id="hub" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#3d4f5b"/>
+      <stop offset="100%" stop-color="#202d36"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#hub)"/>
+  <rect y="400" width="960" height="140" fill="#22313b"/>
+  <rect x="80" y="140" width="120" height="290" fill="#2f404b"/>
+  <rect x="380" y="160" width="250" height="240" fill="#324957"/>
+  <circle cx="505" cy="280" r="95" fill="#253743" stroke="#9cb7c5" stroke-width="10"/>
+  <rect x="790" y="130" width="120" height="300" fill="#2f404b"/>
+  <text x="36" y="60" fill="#e6f2ff" font-size="34" font-family="Courier New">TRAIN HUB</text>
+</svg>

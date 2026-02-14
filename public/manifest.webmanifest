@@ -1,0 +1,10 @@
+{
+  "name": "Machinar MVP",
+  "short_name": "Machinar",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#101726",
+  "theme_color": "#1f2937",
+  "description": "머쉬나리움 스타일 2D 퍼즐 어드벤처 웹 MVP"
+}

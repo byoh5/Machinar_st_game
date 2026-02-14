@@ -1,0 +1,313 @@
+:root {
+  --bg-0: #111827;
+  --bg-1: #0f172a;
+  --panel: #1f2937;
+  --panel-soft: #2b3442;
+  --accent: #f4a259;
+  --accent-2: #f7ede2;
+  --danger: #d94f4f;
+  --text: #f3f4f6;
+  --muted: #c3c8d1;
+  --ok: #8ad18a;
+
+  font-family: 'IBM Plex Sans KR', 'Pretendard', 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--text);
+  background: radial-gradient(circle at 20% 10%, #243347 0%, #101726 52%, #0b111d 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  color: var(--text);
+}
+
+#app {
+  min-height: 100vh;
+  padding: 12px;
+}
+
+.app-shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  gap: 10px;
+}
+
+.hud {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: flex-start;
+  background: linear-gradient(120deg, rgba(43, 52, 66, 0.95), rgba(31, 41, 55, 0.92));
+  border: 1px solid rgba(247, 237, 226, 0.12);
+  border-radius: 14px;
+  padding: 10px;
+}
+
+.hud-main h1 {
+  margin: 0;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
+}
+
+.scene-title {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.hud-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.ctrl-btn {
+  border: 1px solid rgba(247, 237, 226, 0.25);
+  background: #202a39;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.ctrl-btn:hover {
+  border-color: var(--accent);
+}
+
+.ctrl-btn.danger {
+  border-color: rgba(217, 79, 79, 0.45);
+  color: #ffd8d8;
+}
+
+.message-wrap,
+.episode-wrap,
+.inventory-wrap,
+.status-wrap {
+  border: 1px solid rgba(247, 237, 226, 0.11);
+  background: rgba(18, 28, 43, 0.82);
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+
+.message-wrap p {
+  margin: 0;
+  color: var(--accent-2);
+}
+
+.game-area {
+  border: 1px solid rgba(247, 237, 226, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0a111b;
+}
+
+.game-canvas {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.game-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.inventory-wrap h2,
+.episode-wrap h2,
+.status-wrap h2 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+  color: #ffca8a;
+}
+
+.episode-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.episode-item {
+  border: 1px solid rgba(247, 237, 226, 0.22);
+  background: #212f41;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.episode-item.selected {
+  border-color: #ffd899;
+  background: #3d2f19;
+  color: #fff3dd;
+}
+
+.episode-item.locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.inventory-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.inventory-item {
+  border: 1px solid rgba(247, 237, 226, 0.22);
+  background: #212f41;
+  color: var(--text);
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.inventory-item.selected {
+  border-color: #ffd899;
+  background: #3d2f19;
+  color: #fff3dd;
+}
+
+.inventory-item.clear {
+  border-color: rgba(195, 200, 209, 0.5);
+  color: var(--muted);
+}
+
+.inventory-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.status-wrap p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 15, 0.72);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  z-index: 20;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-card {
+  width: min(560px, 96vw);
+  max-height: 92vh;
+  overflow: auto;
+  border-radius: 14px;
+  background: #1b2636;
+  border: 1px solid rgba(247, 237, 226, 0.19);
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #ffe5bc;
+}
+
+.puzzle-body {
+  display: grid;
+  gap: 10px;
+}
+
+.puzzle-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.puzzle-key,
+.logic-option {
+  border: 1px solid rgba(247, 237, 226, 0.22);
+  background: #212f41;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.logic-option.selected,
+.puzzle-key.selected {
+  background: #46300f;
+  border-color: #ffd899;
+}
+
+.puzzle-inline-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.puzzle-display {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.switch-btn {
+  min-height: 48px;
+  font-weight: 700;
+}
+
+.logic-options {
+  display: grid;
+  gap: 8px;
+}
+
+.hint-text {
+  margin: 0;
+  color: #ffeab6;
+}
+
+.feedback-text {
+  margin: 0;
+  color: var(--ok);
+}
+
+@media (max-width: 700px) {
+  #app {
+    padding: 8px;
+  }
+
+  .hud {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hud-controls {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}

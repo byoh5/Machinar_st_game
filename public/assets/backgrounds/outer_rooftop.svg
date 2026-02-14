@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540">
+  <defs>
+    <linearGradient id="roof" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#334a73"/>
+      <stop offset="100%" stop-color="#18243b"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#roof)"/>
+  <rect y="410" width="960" height="130" fill="#1f2c45"/>
+  <rect x="80" y="150" width="120" height="300" fill="#2c3d5f"/>
+  <rect x="300" y="190" width="260" height="210" fill="#324b76"/>
+  <rect x="660" y="150" width="240" height="290" fill="#3d5a8a"/>
+  <circle cx="760" cy="280" r="30" fill="#9ae2ff"/>
+  <circle cx="430" cy="255" r="20" fill="#9ae2ff"/>
+  <text x="36" y="60" fill="#dce9ff" font-size="34" font-family="Courier New">OUTER ROOFTOP</text>
+</svg>
